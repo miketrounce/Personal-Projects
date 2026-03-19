@@ -6,6 +6,8 @@ import {
   DEFAULT_COUNTRY_ID,
   DEFAULT_MODE,
   GAME_MODES,
+  getDailyChallenge,
+  getRunAnalysis,
   getScore,
   getSummaryMessage
 } from "./economy.js";
@@ -14,6 +16,7 @@ import { SUPABASE_ANON_KEY, SUPABASE_URL } from "./supabase-config.js";
 const statsElement = document.querySelector("#stats");
 const statusElement = document.querySelector("#status");
 const historyElement = document.querySelector("#history");
+const analysisElement = document.querySelector("#analysis");
 const macroChartElement = document.querySelector("#macro-chart");
 const socialChartElement = document.querySelector("#social-chart");
 const leaderboardElement = document.querySelector("#leaderboard");
@@ -34,6 +37,8 @@ const modeSelect = document.querySelector("#mode-select");
 const modeSummaryElement = document.querySelector("#mode-summary");
 const countrySelect = document.querySelector("#country-select");
 const countrySummaryElement = document.querySelector("#country-summary");
+const challengeSummaryElement = document.querySelector("#challenge-summary");
+const dailyChallengeToggle = document.querySelector("#daily-challenge-toggle");
 const traderHintElement = document.querySelector("#trader-hint");
 
 const policyFields = {
@@ -56,6 +61,8 @@ const tradeFields = {
 let state = createInitialState(DEFAULT_COUNTRY_ID, DEFAULT_MODE);
 let supabase = null;
 let leaderboardEnabled = false;
+let dailyChallengeEnabled = false;
+const todayKey = new Date().toISOString().slice(0, 10);
 
 function formatPercent(value) {
   return `${Number(value).toFixed(1)}%`;
@@ -216,6 +223,18 @@ function populateCountrySelect() {
   countrySelect.value = state.countryId ?? DEFAULT_COUNTRY_ID;
 }
 
+function renderAnalysis() {
+  analysisElement.innerHTML = getRunAnalysis(state)
+    .map(
+      (item) => `<article class="analysis-card">
+        <p class="analysis-label">${item.label}</p>
+        <h3>${item.value}</h3>
+        <p>${item.note}</p>
+      </article>`
+    )
+    .join("");
+}
+
 function renderStats() {
   const debtRatio = ((state.debt / state.gdp) * 100).toFixed(1);
   const commonStats = [
@@ -366,6 +385,11 @@ function syncModeUI() {
   const traderMode = state.mode === "trader";
   policyForm.hidden = traderMode;
   traderForm.hidden = !traderMode;
+  modeSelect.disabled = dailyChallengeEnabled;
+  countrySelect.disabled = dailyChallengeEnabled;
+  dailyChallengeToggle.setAttribute("aria-pressed", String(dailyChallengeEnabled));
+  dailyChallengeToggle.textContent = dailyChallengeEnabled ? "On" : "Off";
+  dailyChallengeToggle.classList.toggle("active", dailyChallengeEnabled);
   controlsEyebrow.textContent = traderMode ? "Trading" : "Decisions";
   controlsTitle.textContent = traderMode
     ? "Pick your trades for the next year"
@@ -409,12 +433,17 @@ function render() {
     chartPoints
   );
   renderHistory();
+  renderAnalysis();
   syncModeUI();
   statusElement.textContent = getSummaryMessage(state);
   modeSelect.value = state.mode;
   countrySelect.value = state.countryId;
   modeSummaryElement.textContent = GAME_MODES[state.mode].summary;
   countrySummaryElement.textContent = state.countrySummary;
+  const challenge = getDailyChallenge(todayKey);
+  challengeSummaryElement.textContent = dailyChallengeEnabled
+    ? `${challenge.title}: ${challenge.summary}`
+    : `Daily challenge refreshes each day with one fixed country, mode, and opening setup for everyone.`;
 
   const finished = state.status === "finished";
   advanceButton.disabled = finished;
@@ -441,7 +470,10 @@ function render() {
 }
 
 function resetState() {
-  state = createInitialState(countrySelect.value, modeSelect.value);
+  state = createInitialState(countrySelect.value, modeSelect.value, {
+    dailyChallenge: dailyChallengeEnabled,
+    challengeDate: todayKey
+  });
   applyPolicyDefaults();
   resetTradeDefaults();
   syncPolicyOutputs();
@@ -469,6 +501,10 @@ restartButton.addEventListener("click", resetState);
 traderRestartButton.addEventListener("click", resetState);
 modeSelect.addEventListener("change", resetState);
 countrySelect.addEventListener("change", resetState);
+dailyChallengeToggle.addEventListener("click", () => {
+  dailyChallengeEnabled = !dailyChallengeEnabled;
+  resetState();
+});
 
 populateModeSelect();
 populateCountrySelect();

@@ -7,6 +7,7 @@ Live page:
 A small browser game with two play styles:
 - `President Mode`: set tax, spending, and borrowing policy each year to maximize GDP growth over a fixed term
 - `Trader Mode`: react to the same economy by trading bonds and currencies for profit
+- `Daily Challenge`: one fixed scenario per day for everyone, with a built-in post-run breakdown
 
 ## Run locally
 
@@ -29,12 +30,14 @@ Pick a country-inspired starting economy, then play through an eight year term.
 
 - Country presets for Brazil, Indonesia, Serbia, and China
 - Two player modes with different objectives
+- A daily challenge toggle that locks the run to the same scenario for everyone that day
 - Annual policy choices for tax, spending, and borrowing in `President Mode`
 - Simple bond and currency positions in `Trader Mode`
 - Bond yields that worsen as debt and borrowing rise
 - Unemployment as a second labor-market health signal
 - Deterministic yearly shocks so runs stay testable
 - Election checkpoints where low approval can end the game early
+- Post-run analysis cards for best year, worst year, turning point, and risk
 - Optional Supabase leaderboard for shared scores
 
 ## Supabase leaderboard setup

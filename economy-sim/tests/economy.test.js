@@ -8,6 +8,8 @@ import {
   calculateYearOutcome,
   COUNTRY_PRESETS,
   createInitialState,
+  getDailyChallenge,
+  getRunAnalysis,
   getScore
 } from "../src/economy.js";
 
@@ -203,4 +205,57 @@ test("trader mode finishes after the final year", () => {
 
   assert.equal(state.status, "finished");
   assert.equal(state.history.length, state.termLength);
+});
+
+test("daily challenge is deterministic for a given date", () => {
+  const challengeA = getDailyChallenge("2026-03-19");
+  const challengeB = getDailyChallenge("2026-03-19");
+
+  assert.deepEqual(challengeA, challengeB);
+});
+
+test("daily challenge state locks to the scenario mode and country", () => {
+  const challenge = getDailyChallenge("2026-03-19");
+  const state = createInitialState("brazil", "president", {
+    dailyChallenge: true,
+    challengeDate: "2026-03-19"
+  });
+
+  assert.equal(state.dailyChallenge, true);
+  assert.equal(state.mode, challenge.mode);
+  assert.equal(state.countryId, challenge.countryId);
+  assert.equal(state.challenge.title, challenge.title);
+});
+
+test("post-run analysis returns cards after a president run", () => {
+  let state = {
+    ...createInitialState("indonesia"),
+    approval: 72
+  };
+
+  for (let year = 0; year < 3; year += 1) {
+    state = applyPolicy(state, {
+      taxRate: 20,
+      spendingRate: 21,
+      borrowingRate: 3
+    });
+  }
+
+  const analysis = getRunAnalysis(state);
+
+  assert.equal(analysis.length, 4);
+  assert.equal(analysis[0].label, "Best year");
+});
+
+test("post-run analysis returns trade insights after a trader run", () => {
+  let state = createInitialState("serbia", "trader");
+  state = applyTrade(state, {
+    bondPosition: "long",
+    currencyPosition: "short"
+  });
+
+  const analysis = getRunAnalysis(state);
+
+  assert.equal(analysis.length, 4);
+  assert.equal(analysis[0].label, "Best trade");
 });

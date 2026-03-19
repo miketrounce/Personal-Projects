@@ -2,6 +2,7 @@ export const TERM_LENGTH = 8;
 export const ELECTION_YEARS = [4, 8];
 export const DEFAULT_COUNTRY_ID = "brazil";
 export const DEFAULT_MODE = "president";
+export const DEFAULT_CHALLENGE_DATE = "2026-01-01";
 
 export const GAME_MODES = {
   president: {
@@ -156,6 +157,69 @@ export const YEARLY_SHOCKS = {
   }
 };
 
+export const DAILY_CHALLENGE_SCENARIOS = [
+  {
+    id: "brazil-inflation-firefight",
+    title: "Brazil Inflation Firefight",
+    summary:
+      "Growth is still alive, but inflation and yields are running hot. Can you stabilize the situation before voters lose patience?",
+    countryId: "brazil",
+    mode: "president",
+    overrides: {
+      debt: 86,
+      inflation: 6.4,
+      unemployment: 7.1,
+      approval: 49,
+      bondYield: 7.4
+    }
+  },
+  {
+    id: "indonesia-growth-sprint",
+    title: "Indonesia Growth Sprint",
+    summary:
+      "Momentum is strong and markets are calm. Push for a standout term without letting overheating undo the run.",
+    countryId: "indonesia",
+    mode: "president",
+    overrides: {
+      debt: 39,
+      inflation: 2.8,
+      unemployment: 4.8,
+      approval: 63,
+      bondYield: 4.2
+    }
+  },
+  {
+    id: "serbia-currency-watch",
+    title: "Serbia Currency Watch",
+    summary:
+      "The market is nervous and external shocks are coming. Trade bonds and FX through a volatile stretch and stay alive.",
+    countryId: "serbia",
+    mode: "trader",
+    overrides: {
+      debt: 61,
+      inflation: 6.2,
+      unemployment: 8.3,
+      approval: 50,
+      bondYield: 6.4
+    }
+  },
+  {
+    id: "china-bond-turn",
+    title: "China Bond Turn",
+    summary:
+      "Growth has slowed, leverage is heavy, and markets are waiting for the next move. Read the rates and FX path better than the crowd.",
+    countryId: "china",
+    mode: "trader",
+    overrides: {
+      debt: 101,
+      inflation: 1.2,
+      unemployment: 5.5,
+      approval: 57,
+      bondYield: 3.9
+    }
+  }
+];
+
 const DEFAULT_MODIFIERS = {
   growthBias: 0,
   inflationBias: 0,
@@ -196,26 +260,64 @@ function createBaseState(countryId, mode) {
   };
 }
 
+function applyStateOverrides(state, overrides = {}) {
+  return {
+    ...state,
+    ...overrides,
+    initialGdp: overrides.gdp ?? state.initialGdp,
+    initialDebt: overrides.debt ?? state.initialDebt,
+    initialInflation: overrides.inflation ?? state.initialInflation,
+    initialUnemployment: overrides.unemployment ?? state.initialUnemployment
+  };
+}
+
+function hashDateKey(dateKey) {
+  return dateKey.split("").reduce((total, character) => total + character.charCodeAt(0), 0);
+}
+
+export function getDailyChallenge(dateKey = DEFAULT_CHALLENGE_DATE) {
+  const index = hashDateKey(dateKey) % DAILY_CHALLENGE_SCENARIOS.length;
+  const scenario = DAILY_CHALLENGE_SCENARIOS[index];
+
+  return {
+    ...scenario,
+    dateKey
+  };
+}
+
 export function createInitialState(
   countryId = DEFAULT_COUNTRY_ID,
-  mode = DEFAULT_MODE
+  mode = DEFAULT_MODE,
+  options = {}
 ) {
-  const baseState = createBaseState(countryId, mode);
+  const useDailyChallenge = options.dailyChallenge ?? false;
+  const challengeDate = options.challengeDate ?? DEFAULT_CHALLENGE_DATE;
+  const challenge = useDailyChallenge ? getDailyChallenge(challengeDate) : null;
+  const resolvedCountryId = challenge?.countryId ?? countryId;
+  const resolvedMode = challenge?.mode ?? mode;
+  const baseState = createBaseState(resolvedCountryId, resolvedMode);
+  const challengeState = challenge
+    ? applyStateOverrides(baseState, challenge.overrides)
+    : baseState;
 
-  if (mode === "trader") {
+  if (resolvedMode === "trader") {
     return {
-      ...baseState,
+      ...challengeState,
       electionResult: null,
       portfolioValue: 100,
       lastPnl: 0,
       bestTrade: 0,
-      winStreak: 0
+      winStreak: 0,
+      dailyChallenge: useDailyChallenge,
+      challenge
     };
   }
 
   return {
-    ...baseState,
-    electionResult: null
+    ...challengeState,
+    electionResult: null,
+    dailyChallenge: useDailyChallenge,
+    challenge
   };
 }
 
@@ -550,7 +652,107 @@ export function getScore(state) {
   return Number((state.gdp - state.initialGdp).toFixed(2));
 }
 
+export function getRunAnalysis(state) {
+  if (state.history.length === 0) {
+    return [
+      {
+        label: "Opening",
+        value: "No turns yet",
+        note: "Play a run to unlock best year, turning point, and risk readouts."
+      }
+    ];
+  }
+
+  if (state.mode === "trader") {
+    const bestYear = state.history.reduce((best, entry) =>
+      entry.pnlAmount > best.pnlAmount ? entry : best
+    );
+    const worstYear = state.history.reduce((worst, entry) =>
+      entry.pnlAmount < worst.pnlAmount ? entry : worst
+    );
+    const turningPoint = state.history.reduce((largest, entry) =>
+      Math.abs(entry.pnlAmount) > Math.abs(largest.pnlAmount) ? entry : largest
+    );
+
+    return [
+      {
+        label: "Best trade",
+        value: `Year ${bestYear.year}: ${bestYear.pnlAmount >= 0 ? "+" : ""}${bestYear.pnlAmount.toFixed(2)}`,
+        note: bestYear.headline
+      },
+      {
+        label: "Worst hit",
+        value: `Year ${worstYear.year}: ${worstYear.pnlAmount >= 0 ? "+" : ""}${worstYear.pnlAmount.toFixed(2)}`,
+        note: worstYear.note
+      },
+      {
+        label: "Turning point",
+        value: `Year ${turningPoint.year}`,
+        note: `The biggest swing came from ${turningPoint.bondPosition} bonds and ${turningPoint.currencyPosition} currency.`
+      },
+      {
+        label: "Read",
+        value: state.winStreak >= 2 ? "Momentum trader" : "Volatile tape",
+        note:
+          state.bestTrade > 6
+            ? "You found at least one big macro call."
+            : "A steadier edge would help the score compound."
+      }
+    ];
+  }
+
+  const bestYear = state.history.reduce((best, entry) =>
+    entry.growth > best.growth ? entry : best
+  );
+  const worstYear = state.history.reduce((worst, entry) =>
+    entry.growth < worst.growth ? entry : worst
+  );
+  const turningPoint = state.history.reduce((largest, entry) =>
+    Math.abs(entry.growth) > Math.abs(largest.growth) ? entry : largest
+  );
+  const maxDebtRatio = state.history.reduce(
+    (highest, entry) => Math.max(highest, (entry.nextDebt / entry.nextGdp) * 100),
+    (state.initialDebt / state.initialGdp) * 100
+  );
+
+  return [
+    {
+      label: "Best year",
+      value: `Year ${bestYear.year}: ${bestYear.growth.toFixed(1)}% growth`,
+      note: bestYear.note
+    },
+    {
+      label: "Worst year",
+      value: `Year ${worstYear.year}: ${worstYear.growth.toFixed(1)}% growth`,
+      note: worstYear.note
+    },
+    {
+      label: "Turning point",
+      value: `Year ${turningPoint.year}`,
+      note: `This was the biggest swing in the run at ${turningPoint.growth.toFixed(1)}% growth.`
+    },
+    {
+      label: "Risk check",
+      value: `${maxDebtRatio.toFixed(1)}% max debt / GDP`,
+      note:
+        maxDebtRatio > 100
+          ? "Markets were pushed into a real debt scare."
+          : "Debt stayed within a manageable range."
+    }
+  ];
+}
+
 export function getSummaryMessage(state) {
+  if (state.dailyChallenge && state.challenge) {
+    const prefix = `Daily Challenge: ${state.challenge.title}.`;
+
+    if (state.status === "finished") {
+      return `${prefix} Run complete.`;
+    }
+
+    return `${prefix} ${state.mode === "trader" ? "Trade the daily setup." : "Beat the daily setup."}`;
+  }
+
   if (state.mode === "trader") {
     if (state.status === "finished") {
       const score = getScore(state);

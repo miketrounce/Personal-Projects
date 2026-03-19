@@ -18,6 +18,12 @@
           out.
         </p>
         <div class="setup-grid">
+          <label class="toggle-card" for="daily-challenge-toggle">
+            <span>Daily challenge</span>
+            <button type="button" id="daily-challenge-toggle" class="toggle-button" aria-pressed="false">
+              Off
+            </button>
+          </label>
           <label for="mode-select">
             <span>Choose a mode</span>
             <select id="mode-select" name="mode"></select>
@@ -28,6 +34,7 @@
           </label>
         </div>
         <div class="setup-notes">
+          <p class="challenge-summary" id="challenge-summary"></p>
           <p class="mode-summary" id="mode-summary"></p>
           <p class="country-summary" id="country-summary"></p>
         </div>
@@ -139,6 +146,14 @@
           </div>
         </div>
         <ol id="history" class="history"></ol>
+      </section>
+
+      <section class="panel analysis-panel">
+        <div class="section-title">
+          <p class="eyebrow">Analysis</p>
+          <h2>How your run played out</h2>
+        </div>
+        <div id="analysis" class="analysis-grid"></div>
       </section>
 
       <section class="layout leaderboard-layout">

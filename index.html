@@ -16,10 +16,25 @@
         --muted: #b8b0a4;
       }
 
+      html,
       body {
+        min-height: 100%;
+      }
+
+      body {
+        overflow: hidden;
         background:
           radial-gradient(circle at top left, rgba(129, 182, 76, 0.1), transparent 24%),
           linear-gradient(180deg, #322f2c 0%, #2b2926 100%);
+      }
+
+      .page {
+        width: min(100%, 1480px);
+        min-height: 100vh;
+        padding: 20px 24px;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 16px;
       }
 
       .hero,
@@ -31,14 +46,89 @@
         box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
       }
 
-      .project-card {
+      .hero {
+        border-radius: 24px;
+        padding: 22px 28px;
+      }
+
+      .hero-compact {
+        display: grid;
+        grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.8fr);
+        gap: 24px;
+        align-items: end;
+      }
+
+      .hero-copy {
+        max-width: 880px;
+      }
+
+      .hero-meta {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .mini-card {
+        padding: 14px 16px;
+        border: 1px solid var(--border);
+        border-radius: 18px;
         background: linear-gradient(180deg, #3b3833 0%, #2f2c28 100%);
       }
 
-      h1,
-      h2,
-      h3 {
+      .mini-card strong {
+        display: block;
+        margin-bottom: 6px;
         color: #f4f2ec;
+        font-size: 1rem;
+      }
+
+      .mini-card p {
+        margin: 0;
+        font-size: 0.95rem;
+      }
+
+      .main-grid {
+        display: grid;
+        grid-template-columns: 340px minmax(0, 1fr) 320px;
+        gap: 16px;
+        min-height: 0;
+      }
+
+      .column {
+        min-height: 0;
+        display: grid;
+        gap: 16px;
+      }
+
+      .section-card {
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        background: var(--panel);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+        padding: 18px 20px;
+      }
+
+      .section-card h2,
+      .section-card h3,
+      h1 {
+        color: #f4f2ec;
+      }
+
+      h1 {
+        margin-bottom: 12px;
+        font-size: clamp(2.9rem, 5vw, 4.8rem);
+        line-height: 0.92;
+      }
+
+      h2 {
+        margin: 0 0 8px;
+        max-width: none;
+        font-size: 1.8rem;
+      }
+
+      h3 {
+        margin: 0 0 8px;
+        font-size: 1.15rem;
       }
 
       p,
@@ -51,141 +141,251 @@
         color: #c9c1b4;
       }
 
+      .intro {
+        max-width: 60rem;
+        margin-bottom: 0;
+        font-size: 1.06rem;
+      }
+
+      .hero-actions {
+        margin-top: 20px;
+      }
+
       a {
         background: linear-gradient(180deg, #81b64c 0%, #6aa23d 100%);
         color: #1f231a;
       }
 
-      a.secondary {
+      a.secondary,
+      .ghost-link {
         background: transparent;
         color: #f4f2ec;
-        border-color: var(--border);
+        border: 1px solid var(--border);
+      }
+
+      .ghost-link {
+        display: inline-flex;
       }
 
       .contact-card a {
         background: transparent;
         color: #a9d470;
       }
+
+      .about-points,
+      .project-stack,
+      .contact-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .info-tile {
+        padding: 14px 16px;
+        border-radius: 18px;
+        border: 1px solid var(--border);
+        background: linear-gradient(180deg, #383530 0%, #302d29 100%);
+      }
+
+      .project-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 18px 20px;
+        border-radius: 20px;
+        background: linear-gradient(180deg, #3b3833 0%, #2f2c28 100%);
+      }
+
+      .project-card p {
+        margin-bottom: 0;
+      }
+
+      .project-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .project-links a {
+        padding: 10px 16px;
+      }
+
+      .contact-card {
+        padding: 18px 20px;
+      }
+
+      .contact-card ul {
+        padding-left: 18px;
+        margin: 10px 0 0;
+      }
+
+      .contact-card li + li {
+        margin-top: 6px;
+      }
+
+      @media (max-width: 1180px) {
+        body {
+          overflow: auto;
+        }
+
+        .page {
+          min-height: auto;
+        }
+
+        .hero-compact,
+        .main-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-meta {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 720px) {
+        body {
+          overflow: auto;
+        }
+
+        .page {
+          padding: 14px;
+        }
+
+        .hero {
+          padding: 18px;
+        }
+
+        .hero-meta {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: clamp(2.3rem, 10vw, 3.4rem);
+        }
+      }
     </style>
   </head>
   <body>
     <main class="page">
       <section class="hero">
-        <p class="eyebrow">Personal Home</p>
-        <h1>Michael Trounce</h1>
-        <p class="intro">
-          Builder of EM and Global Macro products, and maker of playful
-          personal projects under the <span class="tricksy-word">Tricksy</span>
-          label.
-        </p>
-        <div class="hero-actions">
-          <a href="#projects">View projects</a>
-          <a href="#contact" class="secondary">Get in touch</a>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-heading">
-          <p class="eyebrow">About</p>
-          <h2>Building practical tools with a markets mindset.</h2>
-        </div>
-        <div class="about-grid">
-          <article class="card">
-            <h3>What I build</h3>
-            <p>
-              I work on products shaped by real-world financial workflows, with
-              a focus on clarity, speed, and usefulness.
-            </p>
-          </article>
-          <article class="card">
-            <h3>How I work</h3>
-            <p>
-              I like moving from idea to working prototype quickly, keeping the
-              path simple and the output easy to understand.
-            </p>
-          </article>
-          <article class="card">
-            <h3>Portfolio scope</h3>
-            <p>
-              I do not own the IP of the professional products that I have
-              built, so only personal projects are showcased here. I group my
-              games, playful experiments, and personal fun builds under the
+        <div class="hero-compact">
+          <div class="hero-copy">
+            <p class="eyebrow">Personal Home</p>
+            <h1>Michael Trounce</h1>
+            <p class="intro">
+              Builder of EM and Global Macro products, and maker of playful
+              personal projects under the
               <span class="tricksy-word">Tricksy</span> label.
             </p>
-          </article>
+            <div class="hero-actions">
+              <a href="./Lula/">Play Lula</a>
+              <a href="mailto:trounceflow@gmail.com" class="secondary">Get in touch</a>
+            </div>
+          </div>
+          <div class="hero-meta">
+            <article class="mini-card">
+              <strong>Current flagship</strong>
+              <p>Lula is a macro strategy game with Politician and Trader variants.</p>
+            </article>
+            <article class="mini-card">
+              <strong>Tricksy</strong>
+              <p>A home for small games, experiments, surprises, and personal builds.</p>
+            </article>
+          </div>
         </div>
       </section>
 
-      <section class="section" id="projects">
-        <div class="section-heading">
-          <p class="eyebrow">Projects</p>
-          <h2>
-            Selected personal projects under
-            <span class="tricksy-word">Tricksy</span>.
-          </h2>
-        </div>
-        <div class="projects">
-          <article class="project-card">
-            <div>
-              <p class="project-type">
-                <span class="tricksy-word tricksy-badge">Tricksy</span>
-                flagship
-              </p>
-              <h3>Lula</h3>
-              <p>
-                Lula is part of <span class="tricksy-word">Tricksy</span>, the
-                label I use to collect together my little games, personal
-                experiments, and fun side projects. It is a macro strategy game
-                with Politician and Trader variants, daily challenges, and a
-                live leaderboard.
-              </p>
+      <section class="main-grid" aria-label="At a glance">
+        <div class="column">
+          <article class="section-card">
+            <p class="eyebrow">About</p>
+            <h2>At a glance.</h2>
+            <div class="about-points">
+              <div class="info-tile">
+                <h3>What I build</h3>
+                <p>Real-world workflow tools shaped by markets, speed, and clarity.</p>
+              </div>
+              <div class="info-tile">
+                <h3>How I work</h3>
+                <p>Fast prototypes, clean paths, useful output, minimal ceremony.</p>
+              </div>
+              <div class="info-tile">
+                <h3>Portfolio scope</h3>
+                <p>Professional IP is excluded. Personal work is grouped under <span class="tricksy-word">Tricksy</span>.</p>
+              </div>
             </div>
-            <a href="./Lula/">Open project</a>
-          </article>
-          <article class="project-card">
-            <div>
-              <p class="project-type">
-                <span class="tricksy-word tricksy-badge">Tricksy</span> arcade
-                build
-              </p>
-              <h3>Classic Snake</h3>
-              <p>
-                A minimal browser-based Snake game that sits alongside Lula as
-                part of the same <span class="tricksy-word">Tricksy</span>
-                collection of playful personal work. It was the first thing I
-                built when I started using Codex, after it suggested a simple
-                get-started project.
-              </p>
-            </div>
-            <a href="./snake/">Open project</a>
           </article>
         </div>
-      </section>
 
-      <section class="section" id="contact">
-        <div class="section-heading">
-          <p class="eyebrow">Contact</p>
-          <h2>Let’s connect.</h2>
+        <div class="column">
+          <article class="section-card">
+            <p class="eyebrow">Projects</p>
+            <h2>Selected builds</h2>
+            <div class="project-stack">
+              <article class="project-card">
+                <div>
+                  <p class="project-type">
+                    <span class="tricksy-word tricksy-badge">Tricksy</span> flagship
+                  </p>
+                  <h3>Lula</h3>
+                  <p>
+                    Macro strategy game with Politician and Trader variants,
+                    daily challenges, and a live leaderboard.
+                  </p>
+                </div>
+                <div class="project-links">
+                  <a href="./Lula/">Open Lula</a>
+                  <a href="./Lula/leaderboard/" class="secondary">Leaderboard</a>
+                </div>
+              </article>
+
+              <article class="project-card">
+                <div>
+                  <p class="project-type">
+                    <span class="tricksy-word tricksy-badge">Tricksy</span> arcade build
+                  </p>
+                  <h3>Classic Snake</h3>
+                  <p>
+                    Browser Snake built as my first Codex get-started project.
+                  </p>
+                </div>
+                <div class="project-links">
+                  <a href="./snake/">Open Snake</a>
+                </div>
+              </article>
+            </div>
+          </article>
         </div>
-        <div class="contact-card">
-          <p>
-            I am based in London, UK. If you would like to connect, the best
-            way is by email or LinkedIn.
-          </p>
-          <ul>
-            <li>Email: trounceflow@gmail.com</li>
-            <li>
-              GitHub:
-              <a href="https://github.com/miketrounce">github.com/miketrounce</a>
-            </li>
-            <li>
-              LinkedIn:
-              <a href="https://www.linkedin.com/in/michael-trounce/"
-                >linkedin.com/in/michael-trounce</a
-              >
-            </li>
-            <li>Location: London, UK</li>
-          </ul>
+
+        <div class="column">
+          <article class="contact-card section-card">
+            <p class="eyebrow">Contact</p>
+            <h2>Connect</h2>
+            <p>
+              Based in London, UK. Best reached by email or LinkedIn.
+            </p>
+            <ul class="contact-list">
+              <li>Email: trounceflow@gmail.com</li>
+              <li>
+                GitHub:
+                <a href="https://github.com/miketrounce">github.com/miketrounce</a>
+              </li>
+              <li>
+                LinkedIn:
+                <a href="https://www.linkedin.com/in/michael-trounce/">
+                  linkedin.com/in/michael-trounce
+                </a>
+              </li>
+            </ul>
+          </article>
+
+          <article class="section-card">
+            <p class="eyebrow">Navigation</p>
+            <h2>Quick links</h2>
+            <div class="project-links">
+              <a href="./portfolio/" class="ghost-link">Portfolio route</a>
+              <a href="./README.md" class="ghost-link">Repo docs</a>
+            </div>
+          </article>
         </div>
       </section>
     </main>

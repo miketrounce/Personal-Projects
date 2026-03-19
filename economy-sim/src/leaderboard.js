@@ -1,7 +1,7 @@
 import {
   SUPABASE_ANON_KEY,
   SUPABASE_URL
-} from "./supabase-config.js?v=20260319-5";
+} from "./supabase-config.js?v=20260319-6";
 
 const leaderboardElement = document.querySelector("#leaderboard");
 const leaderboardStatusElement = document.querySelector("#leaderboard-status");

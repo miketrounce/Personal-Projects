@@ -10,11 +10,11 @@ import {
   getRunAnalysis,
   getScore,
   getSummaryMessage
-} from "./economy.js?v=20260319-4";
+} from "./economy.js?v=20260319-6";
 import {
   SUPABASE_ANON_KEY,
   SUPABASE_URL
-} from "./supabase-config.js?v=20260319-4";
+} from "./supabase-config.js?v=20260319-6";
 
 const openingOverlay = document.querySelector("#opening-overlay");
 const openingCopyElement = document.querySelector("#opening-copy");
@@ -92,7 +92,7 @@ function setActiveNav(targetView, targetId = null) {
   navItems.forEach((item) => {
     const isActive =
       item.dataset.view === targetView &&
-      (targetId === null ? item.dataset.target === "hero-card" : item.dataset.target === targetId);
+      (targetId === null ? item.dataset.target === "play-panel" : item.dataset.target === targetId);
     item.classList.toggle("active", isActive);
   });
 }
@@ -553,7 +553,7 @@ populateCountrySelect();
 applyPolicyDefaults();
 resetTradeDefaults();
 syncPolicyOutputs();
-setActiveNav("home", "hero-card");
+setActiveNav("home", "play-panel");
 render();
 playOpeningOverlay();
 initializeSupabase();

@@ -1,4 +1,4 @@
-# Economy Sim
+# Lula
 
 Live page:
 

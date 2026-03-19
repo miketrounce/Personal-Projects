@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kaboom</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero-card panel">
+        <div>
+          <p class="eyebrow">Tricksy Lab</p>
+          <h1>Kaboom</h1>
+          <p class="intro">
+            Mix suspicious chemicals, chase ridiculous lab objectives, and try
+            to keep the room standing for six rounds of comic chemistry.
+          </p>
+        </div>
+        <div class="hero-side">
+          <div class="hero-pill">Age 9+</div>
+          <div class="hero-copy">
+            Curious kids, tweens, and chaos-loving grown-ups welcome.
+          </div>
+        </div>
+      </section>
+
+      <section class="dashboard">
+        <div class="left-column">
+          <article class="panel lab-panel">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Round Objective</p>
+                <h2 id="objective-title">Load the lab</h2>
+              </div>
+              <div class="round-chip" id="round-chip">Round 1 / 6</div>
+            </div>
+            <p class="objective-copy" id="objective-copy">
+              Pick two chemicals and a heat level to begin.
+            </p>
+
+            <div class="mix-grid">
+              <label class="control">
+                <span>Chemical A</span>
+                <select id="primary-chemical"></select>
+              </label>
+              <label class="control">
+                <span>Chemical B</span>
+                <select id="secondary-chemical"></select>
+              </label>
+            </div>
+
+            <label class="control slider-control">
+              <span>Heat level</span>
+              <output id="heat-output">Medium</output>
+              <input
+                id="heat-level"
+                type="range"
+                min="0"
+                max="2"
+                step="1"
+                value="1"
+              />
+            </label>
+
+            <div class="actions">
+              <button id="mix-button" type="button" class="primary-button">
+                Mix it
+              </button>
+              <button id="restart-button" type="button" class="secondary-button">
+                Restart run
+              </button>
+            </div>
+          </article>
+
+          <article class="panel reaction-panel">
+            <p class="eyebrow">Latest Reaction</p>
+            <div class="reaction-stage" id="reaction-stage">
+              <div class="beaker beaker-left"></div>
+              <div class="burst" id="burst"></div>
+              <div class="beaker beaker-right"></div>
+            </div>
+            <h2 id="reaction-title">Waiting for the first mix</h2>
+            <p id="reaction-copy">
+              Your reaction result will show up here with all the ridiculous
+              science drama attached.
+            </p>
+            <div class="reaction-tags">
+              <span id="effect-tag">Effect: none</span>
+              <span id="heat-tag">Heat: medium</span>
+              <span id="score-tag">+0 points</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="right-column">
+          <article class="panel score-panel">
+            <p class="eyebrow">Lab Status</p>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <span>Total score</span>
+                <strong id="score-value">0</strong>
+              </div>
+              <div class="stat-card">
+                <span>Lab safety</span>
+                <strong id="safety-value">100</strong>
+              </div>
+              <div class="stat-card">
+                <span>Best streak</span>
+                <strong id="streak-value">0</strong>
+              </div>
+              <div class="stat-card">
+                <span>Status</span>
+                <strong id="status-value">Ready</strong>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel ingredients-panel">
+            <p class="eyebrow">Chemicals</p>
+            <ul class="chem-list" id="chemical-list"></ul>
+          </article>
+
+          <article class="panel log-panel">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Reaction Log</p>
+                <h2>What just exploded</h2>
+              </div>
+            </div>
+            <ol id="log-list" class="log-list"></ol>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

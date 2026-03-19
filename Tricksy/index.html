@@ -97,6 +97,38 @@
         background: linear-gradient(180deg, #3b3833 0%, #2f2c28 100%);
       }
 
+      .meta-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+
+      .eyebrow.meta-label {
+        margin-bottom: 0;
+      }
+
+      .age-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.34rem 0.72rem;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: rgba(129, 182, 76, 0.14);
+        color: #d7edb8;
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+      }
+
+      .age-note {
+        margin-bottom: 12px;
+        color: #d2cbc0;
+        font-size: 0.95rem;
+      }
+
       .actions {
         display: flex;
         flex-wrap: wrap;
@@ -143,6 +175,7 @@
         <div class="actions">
           <a class="primary" href="./Lula/">Play Lula</a>
           <a class="secondary" href="./Snake/">Play Snake</a>
+          <a class="secondary" href="./Kaboom/">Play Kaboom</a>
           <a class="secondary" href="../">Back home</a>
           <a class="secondary" href="../Professional/">Professional</a>
         </div>
@@ -150,8 +183,12 @@
 
       <section class="grid">
         <article class="card">
-          <p class="eyebrow">Flagship</p>
+          <div class="meta-row">
+            <p class="eyebrow meta-label">Flagship</p>
+            <span class="age-badge">14+</span>
+          </div>
           <h2>Lula</h2>
+          <p class="age-note">Best for teens and up who enjoy strategy, policy, and markets.</p>
           <p>
             A macro strategy game with Politician and Trader variants, daily
             challenges, a leaderboard, and a strong game-platform UI.
@@ -163,8 +200,12 @@
         </article>
 
         <article class="card">
-          <p class="eyebrow">Arcade</p>
+          <div class="meta-row">
+            <p class="eyebrow meta-label">Arcade</p>
+            <span class="age-badge">7+</span>
+          </div>
           <h2>Snake</h2>
+          <p class="age-note">Easy to pick up for younger players and simple enough for a 7-year-old.</p>
           <p>
             A browser-based Snake game built as my first Codex get-started
             project.
@@ -175,12 +216,19 @@
         </article>
 
         <article class="card">
-          <p class="eyebrow">Direction</p>
-          <h2>What lives here</h2>
+          <div class="meta-row">
+            <p class="eyebrow meta-label">Lab chaos</p>
+            <span class="age-badge">9+</span>
+          </div>
+          <h2>Kaboom</h2>
+          <p class="age-note">A silly chemistry game for curious kids, tweens, and anyone who enjoys chain-reaction nonsense.</p>
           <p>
-            Small releases, surprising mechanics, playful interfaces, and
-            experiments that do not fit the professional side of the site.
+            Mix chemicals, chase ridiculous objectives, and try to keep the lab
+            standing through six rounds of comic experimental disaster.
           </p>
+          <div class="actions">
+            <a class="primary" href="./Kaboom/">Open Kaboom</a>
+          </div>
         </article>
       </section>
     </main>

@@ -27,6 +27,14 @@ Professional-facing page for background, work style, and contact details.
 
 Umbrella page for small games, playful experiments, and personal builds.
 
+### Kaboom
+
+- Folder: [`Tricksy/Kaboom/`](/Users/michaeltrounce/Documents/New project/Tricksy/Kaboom)
+- Live site: [https://miketrounce.github.io/Tricksy/Kaboom/](https://miketrounce.github.io/Tricksy/Kaboom/)
+
+A silly chemistry-mixing game where surprising reactions and comic lab chaos
+are the goal.
+
 ### Snake
 
 - Folder: [`Tricksy/Snake/`](/Users/michaeltrounce/Documents/New project/Tricksy/Snake)
@@ -66,6 +74,7 @@ npm test
 miketrounce.github.io/
   Professional/
   Tricksy/
+    Kaboom/
     Lula/
     Snake/
 ```

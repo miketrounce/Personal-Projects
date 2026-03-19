@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Classic Snake</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="game-shell" aria-label="Snake game">
+        <header class="hud">
+          <div>
+            <p class="eyebrow">Classic Snake</p>
+            <h1>Keep moving. Keep growing.</h1>
+          </div>
+          <div class="stats" aria-live="polite">
+            <div class="stat">
+              <span>Score</span>
+              <strong id="score">0</strong>
+            </div>
+            <div class="stat">
+              <span>Status</span>
+              <strong id="status">Ready</strong>
+            </div>
+          </div>
+        </header>
+
+        <div class="board-wrap">
+          <div
+            id="board"
+            class="board"
+            role="grid"
+            aria-label="Snake board"
+          ></div>
+        </div>
+
+        <div class="actions">
+          <button id="pause-button" type="button">Pause</button>
+          <button id="restart-button" type="button">Restart</button>
+        </div>
+
+        <p class="instructions">
+          Use arrow keys or WASD to move. Press Space to pause. Restart after
+          game over.
+        </p>
+
+        <div class="controls" aria-label="Touch controls">
+          <button type="button" data-direction="up">Up</button>
+          <div class="controls-row">
+            <button type="button" data-direction="left">Left</button>
+            <button type="button" data-direction="down">Down</button>
+            <button type="button" data-direction="right">Right</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

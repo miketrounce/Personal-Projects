@@ -2,12 +2,32 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Open Snake in Browser",
+      "name": "Open Projects Home",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "open",
       "args": [
         "http://localhost:4173"
+      ],
+      "preLaunchTask": "Start Snake server"
+    },
+    {
+      "name": "Open Snake in Browser",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "open",
+      "args": [
+        "http://localhost:4173/snake/"
+      ],
+      "preLaunchTask": "Start Snake server"
+    },
+    {
+      "name": "Open Portfolio in Browser",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "open",
+      "args": [
+        "http://localhost:4173/portfolio/"
       ],
       "preLaunchTask": "Start Snake server"
     }

@@ -1,43 +1,45 @@
-# Classic Snake
+# Personal Projects
 
-Play it here:
+A home for small personal builds, with each project kept in its own folder.
 
-[https://miketrounce.github.io/Personal-Projects/](https://miketrounce.github.io/Personal-Projects/)
+## Projects
 
-A minimal browser-based Snake game built with plain HTML, CSS, and JavaScript.
+### Snake
 
-## Play online
+- Folder: [`snake/`](/Users/michaeltrounce/Documents/New project/snake)
+- Live site: [https://miketrounce.github.io/Personal-Projects/snake/](https://miketrounce.github.io/Personal-Projects/snake/)
 
-Open the GitHub Pages site:
+Classic browser-based Snake built with plain HTML, CSS, and JavaScript.
 
-[https://miketrounce.github.io/Personal-Projects/](https://miketrounce.github.io/Personal-Projects/)
+### Personal Portfolio
+
+- Folder: [`portfolio/`](/Users/michaeltrounce/Documents/New project/portfolio)
+- Live site: [https://miketrounce.github.io/Personal-Projects/portfolio/](https://miketrounce.github.io/Personal-Projects/portfolio/)
+
+A personal portfolio starter page for showcasing work and contact details.
 
 ## Run locally
+
+From the repo root:
 
 ```bash
 npm start
 ```
 
-Open [http://localhost:4173](http://localhost:4173) in your browser.
+Then open [http://localhost:4173](http://localhost:4173) and click into the project you want.
 
 ## Run tests
+
+From the repo root:
 
 ```bash
 npm test
 ```
 
-## Controls
+## Repo structure
 
-- Arrow keys to move
-- `W`, `A`, `S`, `D` to move
-- `Space` to pause or resume
-- `Restart` button to reset the game
-- On-screen buttons for touch/mobile play
-
-## Manual check
-
-- Snake moves one grid cell per tick
-- Eating food increases the score and snake length
-- Hitting walls ends the game
-- Hitting the snake body ends the game
-- Pause and restart work as expected
+```text
+Personal-Projects/
+  portfolio/
+  snake/
+```

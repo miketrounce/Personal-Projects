@@ -10,11 +10,11 @@ import {
   getRunAnalysis,
   getScore,
   getSummaryMessage
-} from "./economy.js?v=20260319-3";
+} from "./economy.js?v=20260319-4";
 import {
   SUPABASE_ANON_KEY,
   SUPABASE_URL
-} from "./supabase-config.js?v=20260319-3";
+} from "./supabase-config.js?v=20260319-4";
 
 const openingOverlay = document.querySelector("#opening-overlay");
 const openingCopyElement = document.querySelector("#opening-copy");
@@ -26,6 +26,13 @@ const turnCopyElement = document.querySelector("#turn-copy");
 const turnChipAElement = document.querySelector("#turn-chip-a");
 const turnChipBElement = document.querySelector("#turn-chip-b");
 const turnChipCElement = document.querySelector("#turn-chip-c");
+const appViews = document.querySelectorAll(".app-view");
+const navItems = document.querySelectorAll(".nav-item");
+const homeView = document.querySelector("#home-view");
+const leaderboardView = document.querySelector("#leaderboard-view");
+const openLeaderboardButton = document.querySelector("#open-leaderboard-button");
+const leaderboardSearchInput = document.querySelector("#leaderboard-search");
+const leaderboardHighlightsElement = document.querySelector("#leaderboard-highlights");
 const statsElement = document.querySelector("#stats");
 const statusElement = document.querySelector("#status");
 const historyElement = document.querySelector("#history");
@@ -78,6 +85,8 @@ let dailyChallengeEnabled = false;
 const todayKey = new Date().toISOString().slice(0, 10);
 let openingTimer = null;
 let transitionTimer = null;
+let currentView = "home";
+let leaderboardEntries = [];
 
 function formatPercent(value) {
   return `${Number(value).toFixed(1)}%`;
@@ -91,6 +100,38 @@ function formatSignedValue(value, digits = 1) {
 
 function formatMoney(value) {
   return `${value >= 0 ? "+" : ""}${value.toFixed(2)}`;
+}
+
+function setActiveNav(targetView, targetId = null) {
+  navItems.forEach((item) => {
+    const isActive =
+      item.dataset.view === targetView &&
+      (targetId === null
+        ? item.dataset.target === "hero-card" || item.dataset.target === "leaderboard-view"
+        : item.dataset.target === targetId);
+    item.classList.toggle("active", isActive);
+  });
+}
+
+function showView(viewName) {
+  currentView = viewName;
+  appViews.forEach((view) => {
+    const isActive = view.id === `${viewName}-view`;
+    view.classList.toggle("active-view", isActive);
+    view.classList.toggle("hidden-view", !isActive);
+  });
+}
+
+function navigateTo(viewName, targetId = null) {
+  showView(viewName);
+  setActiveNav(viewName, targetId);
+
+  if (viewName === "home" && targetId) {
+    const target = document.querySelector(`#${targetId}`);
+    target?.scrollIntoView({ behavior: "smooth", block: "start" });
+  } else {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 }
 
 function showOverlay(element) {
@@ -129,8 +170,8 @@ function buildOpeningCopy() {
   }
 
   return state.mode === "trader"
-    ? `Desk is open in ${state.countryName}. Read the tape, catch the bond and currency moves, and build your score.`
-    : `Cabinet briefing for ${state.countryName}. Shape policy, guide the economy, and try to deliver the strongest term on the board.`;
+    ? `Your hedge fund desk is live in ${state.countryName}. Read the tape, trade bonds and FX, and build the strongest P&L.`
+    : `You are taking charge of ${state.countryName}. Shape policy, guide the economy, and try to deliver the strongest term on the board.`;
 }
 
 function playOpeningOverlay() {
@@ -210,7 +251,8 @@ async function initializeSupabase() {
 
 async function loadLeaderboard() {
   if (!leaderboardEnabled) {
-    leaderboardElement.innerHTML = "<li>Leaderboard unavailable.</li>";
+    leaderboardElement.innerHTML =
+      '<tr><td colspan="5">Leaderboard unavailable.</td></tr>';
     return;
   }
 
@@ -220,24 +262,65 @@ async function loadLeaderboard() {
     .select("player_name, score, gdp, created_at")
     .order("score", { ascending: false })
     .order("created_at", { ascending: false })
-    .limit(10);
+    .limit(25);
 
   if (error) {
     leaderboardStatusElement.textContent = "Could not load leaderboard.";
-    leaderboardElement.innerHTML = `<li>${error.message}</li>`;
+    leaderboardElement.innerHTML = `<tr><td colspan="5">${error.message}</td></tr>`;
     return;
   }
 
-  leaderboardStatusElement.textContent = "Top 10 scores across all runs.";
+  leaderboardEntries = data;
+  renderLeaderboard();
+}
+
+function formatSubmittedDate(value) {
+  const date = new Date(value);
+  return date.toLocaleDateString(undefined, {
+    month: "short",
+    day: "numeric"
+  });
+}
+
+function renderLeaderboard() {
+  const query = leaderboardSearchInput.value.trim().toLowerCase();
+  const filteredEntries = leaderboardEntries.filter((entry) =>
+    entry.player_name.toLowerCase().includes(query)
+  );
+
+  leaderboardStatusElement.textContent =
+    leaderboardEntries.length === 0
+      ? "No scores yet."
+      : `Last update: ${new Date().toLocaleString()}`;
+
   leaderboardElement.innerHTML =
-    data.length === 0
-      ? "<li>No scores yet. Be the first to submit one.</li>"
-      : data
+    filteredEntries.length === 0
+      ? '<tr><td colspan="5">No matching players yet.</td></tr>'
+      : filteredEntries
           .map(
-            (entry, index) =>
-              `<li><strong>#${index + 1} ${entry.player_name}</strong> scored ${Number(
-                entry.score
-              ).toFixed(1)} points and finished at GDP ${Number(entry.gdp).toFixed(1)}.</li>`
+            (entry, index) => `<tr>
+              <td class="rank-cell">#${index + 1}</td>
+              <td class="name-cell">
+                <span class="player-badge">${entry.player_name.slice(0, 1).toUpperCase()}</span>
+                <span>${entry.player_name}</span>
+              </td>
+              <td>${Number(entry.score).toFixed(1)}</td>
+              <td>${Number(entry.gdp).toFixed(1)}</td>
+              <td>${formatSubmittedDate(entry.created_at)}</td>
+            </tr>`
+          )
+          .join("");
+
+  leaderboardHighlightsElement.innerHTML =
+    leaderboardEntries.length === 0
+      ? "<p class=\"tile-copy\">No top players yet.</p>"
+      : leaderboardEntries
+          .slice(0, 3)
+          .map(
+            (entry, index) => `<div class="highlight-item">
+              <strong>#${index + 1} ${entry.player_name}</strong>
+              <span>${Number(entry.score).toFixed(1)} pts</span>
+            </div>`
           )
           .join("");
 }
@@ -504,7 +587,7 @@ function syncModeUI() {
     ? "Pick your trades for the next year"
     : "Set policy for the next year";
   traderHintElement.textContent = traderMode
-    ? "Keep it simple: pick a bond view, pick a currency view, and let the world move."
+    ? "Run the macro book: pick a bond view, pick an FX view, and let the world move."
     : traderHintElement.textContent;
 }
 
@@ -552,7 +635,7 @@ function render() {
   const challenge = getDailyChallenge(todayKey);
   challengeSummaryElement.textContent = dailyChallengeEnabled
     ? `${challenge.title}: ${challenge.summary}`
-    : `Daily challenge refreshes each day with one fixed country, mode, and opening setup for everyone.`;
+    : `Daily challenge refreshes each day with one fixed country, variant, and opening setup for everyone.`;
 
   const finished = state.status === "finished";
   advanceButton.disabled = finished;
@@ -624,12 +707,23 @@ dailyChallengeToggle.addEventListener("click", () => {
   playOpeningOverlay();
 });
 skipOpeningButton.addEventListener("click", dismissOpeningOverlay);
+leaderboardSearchInput.addEventListener("input", renderLeaderboard);
+navItems.forEach((item) => {
+  item.addEventListener("click", (event) => {
+    event.preventDefault();
+    navigateTo(item.dataset.view, item.dataset.target);
+  });
+});
+openLeaderboardButton.addEventListener("click", () => {
+  navigateTo("leaderboard", "leaderboard-view");
+});
 
 populateModeSelect();
 populateCountrySelect();
 applyPolicyDefaults();
 resetTradeDefaults();
 syncPolicyOutputs();
+showView(currentView);
 render();
 playOpeningOverlay();
 initializeSupabase();

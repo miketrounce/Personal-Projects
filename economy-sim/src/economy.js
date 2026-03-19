@@ -7,15 +7,15 @@ export const DEFAULT_CHALLENGE_DATE = "2026-01-01";
 export const GAME_MODES = {
   president: {
     id: "president",
-    name: "President Mode",
+    name: "Politician",
     summary:
-      "Set taxes, spending, and borrowing yourself, then try to deliver the strongest GDP growth over the term."
+      "Take control of one economy, set policy yourself, and try to run the country well over a full term."
   },
   trader: {
     id: "trader",
-    name: "Trader Mode",
+    name: "Trader",
     summary:
-      "The economy keeps moving on its own. Take simple bond and currency positions each year and try to make the most money."
+      "Run a macro hedge fund and try to make money trading bonds and FX as economies evolve around you."
   }
 };
 

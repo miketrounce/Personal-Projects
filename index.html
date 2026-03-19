@@ -95,7 +95,7 @@
 
       .routes-grid {
         display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 14px;
       }
 
@@ -105,6 +105,50 @@
         display: grid;
         gap: 12px;
         align-content: start;
+      }
+
+      .profile-card-home {
+        gap: 14px;
+      }
+
+      .profile-avatar {
+        width: 124px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        justify-self: start;
+        position: relative;
+        overflow: hidden;
+        border: 3px solid rgba(244, 242, 236, 0.9);
+        background:
+          radial-gradient(circle at 50% 34%, #f2cfbc 0 18%, transparent 18.5%),
+          radial-gradient(circle at 50% 78%, #1f2430 0 34%, transparent 34.5%),
+          radial-gradient(circle at 50% 38%, #f0d2c2 0 28%, transparent 28.5%),
+          radial-gradient(circle at 35% 34%, #1c1a1b 0 6%, transparent 6.5%),
+          radial-gradient(circle at 65% 34%, #1c1a1b 0 6%, transparent 6.5%),
+          radial-gradient(circle at 50% 49%, #d88e8b 0 4%, transparent 4.5%),
+          radial-gradient(circle at 50% 56%, #ffffff 0 10%, transparent 10.5%),
+          radial-gradient(circle at 50% 16%, #3b2f27 0 30%, transparent 30.5%),
+          linear-gradient(180deg, #5f6168 0%, #43444b 100%);
+        box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.03);
+      }
+
+      .profile-avatar::before {
+        content: "";
+        position: absolute;
+        inset: 14% 18% auto 18%;
+        height: 20%;
+        border-radius: 50% 50% 40% 40%;
+        background: #2c241f;
+        transform: scaleX(1.08);
+      }
+
+      .profile-avatar::after {
+        content: "";
+        position: absolute;
+        inset: auto 28% 16% 28%;
+        height: 22%;
+        border-radius: 32px 32px 18px 18px;
+        background: linear-gradient(180deg, #243245 0%, #121923 100%);
       }
 
       .route-card.proton-card {
@@ -211,6 +255,72 @@
         color: #b8d8ff;
       }
 
+      .proton-logo {
+        display: inline-block;
+        position: relative;
+        margin-bottom: 14px;
+        padding: 0.04em 0.06em 0.12em;
+        color: #d7ebff;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 900;
+        font-size: 2.1rem;
+        line-height: 0.92;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        text-shadow:
+          0.04em 0.04em 0 rgba(10, 22, 36, 0.28),
+          0 0 18px rgba(111, 181, 255, 0.12);
+      }
+
+      .proton-logo::after {
+        content: "";
+        position: absolute;
+        left: 0.08em;
+        right: 0.08em;
+        bottom: -0.02em;
+        height: 0.22em;
+        border-radius: 999px;
+        background: linear-gradient(90deg, rgba(111, 181, 255, 0.9), rgba(63, 128, 211, 0.5));
+        box-shadow: 0 0 16px rgba(111, 181, 255, 0.2);
+      }
+
+      .tricksy-logo {
+        display: inline-block;
+        position: relative;
+        margin-bottom: 14px;
+        padding: 0.08em 0.16em 0.12em;
+        background-image: linear-gradient(135deg, #ff8c42 0%, #ff4f7a 30%, #7d2bd4 68%, #2a9d8f 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-family: "Trebuchet MS", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-style: italic;
+        font-weight: 900;
+        font-size: 2.15rem;
+        line-height: 0.9;
+        letter-spacing: 0.03em;
+        transform: rotate(-2deg) skewY(-2deg);
+        text-shadow:
+          0.03em 0.03em 0 rgba(255, 255, 255, 0.3),
+          0.08em 0.08em 0 rgba(125, 43, 212, 0.12);
+      }
+
+      .tricksy-logo::after {
+        content: "";
+        position: absolute;
+        left: 0.16em;
+        right: 0.06em;
+        bottom: -0.02em;
+        height: 0.4em;
+        border-radius: 999px;
+        background:
+          radial-gradient(circle at 18% 50%, rgba(255, 140, 66, 0.45) 0 22%, transparent 24%),
+          radial-gradient(circle at 52% 50%, rgba(255, 79, 122, 0.35) 0 18%, transparent 20%),
+          linear-gradient(90deg, rgba(255, 140, 66, 0.22), rgba(125, 43, 212, 0.2), rgba(42, 157, 143, 0.22));
+        transform: rotate(-1deg) skewX(-10deg);
+        z-index: -1;
+      }
+
       @media (max-width: 1280px) {
         body {
           overflow: auto;
@@ -275,39 +385,31 @@
 
       <section class="section-card" aria-label="Homepage sections">
         <p class="eyebrow">Site Paths</p>
-        <h2>Four parts.</h2>
+        <h2>Three paths.</h2>
         <div class="routes-grid">
           <article class="route-card">
-            <p class="route-kicker">1. Introduction</p>
-            <h3>Bio and contact</h3>
-            <p>The root page is the quick overview: who I am, what I build, and how to reach me.</p>
-            <a href="mailto:trounceflow@gmail.com">Email Michael</a>
-          </article>
-
-          <article class="route-card">
-            <p class="route-kicker">2. Professional</p>
+            <p class="route-kicker">1. Professional</p>
+            <div class="profile-avatar" aria-hidden="true"></div>
             <h3>Hiring path</h3>
             <p>I’m looking for a job, so this route is for employers who want a fuller professional picture.</p>
             <a href="./Professional/">Open Professional</a>
           </article>
 
           <article class="route-card proton-card">
-            <p class="route-kicker">3. Proton</p>
+            <div class="proton-logo">Proton</div>
             <h3>Products brand</h3>
             <p>Serious digital products for investment professionals. This is the commercial, no-nonsense side.</p>
             <a href="./Proton/" class="proton-link">Open Proton</a>
           </article>
 
           <article class="route-card">
-            <p class="route-kicker">4. Tricksy</p>
+            <div class="tricksy-logo">Tricksy</div>
             <h3>Fun and games</h3>
-            <p>Three playful games live here right now: Lula, Snake, and Kaboom.</p>
-            <div class="hero-actions">
-              <a href="./Tricksy/">Open Tricksy</a>
-              <a href="./Tricksy/Lula/" class="secondary">Lula</a>
-              <a href="./Tricksy/Snake/" class="secondary">Snake</a>
-              <a href="./Tricksy/Kaboom/" class="secondary">Kaboom</a>
-            </div>
+            <p>
+              Playful releases live here under the Tricksy label, including
+              Lula, Snake, and Kaboom.
+            </p>
+            <a href="./Tricksy/">Open Tricksy</a>
           </article>
         </div>
       </section>

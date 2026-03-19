@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Economy Sim</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <p class="eyebrow">Policy Game</p>
+        <h1>Economy Sim</h1>
+        <p class="intro">
+          Set tax, spending, and borrowing each year. Grow GDP over an eight
+          year term without letting debt spiral out of control, losing market
+          confidence, or being voted out.
+        </p>
+      </section>
+
+      <section class="layout">
+        <section class="panel stats-panel">
+          <div class="section-title">
+            <p class="eyebrow">Dashboard</p>
+            <h2>Current economy</h2>
+          </div>
+          <div class="stats" id="stats"></div>
+          <p class="status" id="status"></p>
+        </section>
+
+        <section class="panel controls-panel">
+          <div class="section-title">
+            <p class="eyebrow">Decisions</p>
+            <h2>Set policy for the next year</h2>
+          </div>
+          <form id="policy-form" class="policy-form">
+            <label>
+              <span>Tax rate</span>
+              <output id="tax-output">22%</output>
+              <input id="tax-rate" name="taxRate" type="range" min="10" max="45" value="22" />
+            </label>
+            <label>
+              <span>Public spending</span>
+              <output id="spending-output">22%</output>
+              <input id="spending-rate" name="spendingRate" type="range" min="10" max="35" value="22" />
+            </label>
+            <label>
+              <span>New borrowing</span>
+              <output id="borrowing-output">3%</output>
+              <input id="borrowing-rate" name="borrowingRate" type="range" min="0" max="12" value="3" />
+            </label>
+            <div class="actions">
+              <button type="submit" id="advance-button">Apply year</button>
+              <button type="button" id="restart-button" class="secondary">Restart</button>
+            </div>
+          </form>
+        </section>
+      </section>
+
+      <section class="panel timeline-panel">
+        <div class="section-title">
+          <p class="eyebrow">Timeline</p>
+          <h2>What happened each year</h2>
+        </div>
+        <ol id="history" class="history"></ol>
+      </section>
+    </main>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

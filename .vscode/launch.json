@@ -30,6 +30,16 @@
         "http://localhost:4173/portfolio/"
       ],
       "preLaunchTask": "Start Snake server"
+    },
+    {
+      "name": "Open Economy Sim in Browser",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "open",
+      "args": [
+        "http://localhost:4173/economy-sim/"
+      ],
+      "preLaunchTask": "Start Snake server"
     }
   ]
 }

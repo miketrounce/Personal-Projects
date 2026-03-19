@@ -8,6 +8,7 @@ import {
 const statsElement = document.querySelector("#stats");
 const statusElement = document.querySelector("#status");
 const historyElement = document.querySelector("#history");
+const chartElement = document.querySelector("#chart");
 const form = document.querySelector("#policy-form");
 const restartButton = document.querySelector("#restart-button");
 const advanceButton = document.querySelector("#advance-button");
@@ -87,8 +88,95 @@ function renderHistory() {
     .join("");
 }
 
+function buildLine(points, xScale, yScale) {
+  return points
+    .map((point, index) => {
+      const x = 56 + index * xScale;
+      const y = 196 - point * yScale;
+      return `${index === 0 ? "M" : "L"} ${x} ${y}`;
+    })
+    .join(" ");
+}
+
+function renderChart() {
+  const series = [
+    { key: "gdp", color: "#29594f", label: "GDP" },
+    { key: "debt", color: "#9a4d2f", label: "Debt" },
+    { key: "inflation", color: "#3f6db1", label: "Inflation" },
+    { key: "unemployment", color: "#8f6bb3", label: "Unemployment" }
+  ];
+
+  const basePoints = [
+    {
+      gdp: 100,
+      debt: 62,
+      inflation: 2.1,
+      unemployment: 5.4
+    },
+    ...state.history.map((entry) => ({
+      gdp: entry.nextGdp,
+      debt: entry.nextDebt,
+      inflation: entry.inflation,
+      unemployment: entry.unemployment
+    }))
+  ];
+
+  const maxValue = Math.max(
+    ...basePoints.flatMap((point) => [
+      point.gdp,
+      point.debt,
+      point.inflation * 10,
+      point.unemployment * 10
+    ]),
+    100
+  );
+  const normalizedPoints = basePoints.map((point) => ({
+    gdp: point.gdp,
+    debt: point.debt,
+    inflation: point.inflation * 10,
+    unemployment: point.unemployment * 10
+  }));
+
+  const xScale = basePoints.length > 1 ? 520 / (basePoints.length - 1) : 0;
+  const yScale = 160 / maxValue;
+  const axisLabels = basePoints
+    .map((_, index) => {
+      const x = 56 + index * xScale;
+      return `<text x="${x}" y="220" text-anchor="middle" font-size="11" fill="#6d6458">Y${index}</text>`;
+    })
+    .join("");
+  const gridLines = [0, 1, 2, 3, 4]
+    .map((step) => {
+      const y = 36 + step * 40;
+      return `<line x1="56" y1="${y}" x2="576" y2="${y}" stroke="#e8dece" stroke-width="1" />`;
+    })
+    .join("");
+  const paths = series
+    .map(
+      (item) =>
+        `<path d="${buildLine(
+          normalizedPoints.map((point) => point[item.key]),
+          xScale,
+          yScale
+        )}" fill="none" stroke="${item.color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />`
+    )
+    .join("");
+
+  chartElement.innerHTML = `
+    <rect x="0" y="0" width="640" height="240" rx="16" fill="#fffaf1"></rect>
+    ${gridLines}
+    <line x1="56" y1="196" x2="576" y2="196" stroke="#bcae97" stroke-width="1.5" />
+    <line x1="56" y1="36" x2="56" y2="196" stroke="#bcae97" stroke-width="1.5" />
+    ${paths}
+    ${axisLabels}
+    <text x="24" y="40" font-size="11" fill="#6d6458">High</text>
+    <text x="26" y="196" font-size="11" fill="#6d6458">Low</text>
+  `;
+}
+
 function render() {
   renderStats();
+  renderChart();
   renderHistory();
   statusElement.textContent = getSummaryMessage(state);
   const disabled = state.status === "finished";

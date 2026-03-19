@@ -20,12 +20,12 @@ Tricksy side.
 
 Professional-facing page for background, work style, and contact details.
 
-### Proton
+### Knowledge Machines
 
-- Folder: [`Proton/`](/Users/michaeltrounce/Documents/New project/Proton)
-- Live site: [https://miketrounce.github.io/Proton/](https://miketrounce.github.io/Proton/)
+- Folder: [`Knowledge-Machines/`](/Users/michaeltrounce/Documents/New project/Knowledge-Machines)
+- Live site: [https://miketrounce.github.io/Knowledge-Machines/](https://miketrounce.github.io/Knowledge-Machines/)
 
-Brand page for the serious digital products I make and sell to investment
+Brand page for the serious knowledge machines I make and sell to investment
 professionals.
 
 ### Tricksy
@@ -81,7 +81,7 @@ npm test
 ```text
 miketrounce.github.io/
   Professional/
-  Proton/
+  Knowledge-Machines/
   Tricksy/
     Kaboom/
     Lula/

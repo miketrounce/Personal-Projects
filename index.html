@@ -105,6 +105,7 @@
         display: grid;
         gap: 12px;
         align-content: start;
+        grid-template-rows: auto auto 1fr auto;
       }
 
       .profile-card-home {
@@ -253,6 +254,7 @@
         position: relative;
         margin-bottom: 14px;
         padding: 0.04em 0.06em 0.12em;
+        min-height: 2.35em;
         color: #d7ebff;
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-weight: 900;
@@ -278,40 +280,88 @@
       }
 
       .tricksy-logo {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: flex-start;
         position: relative;
         margin-bottom: 14px;
-        padding: 0.08em 0.16em 0.12em;
-        background-image: linear-gradient(135deg, #ff8c42 0%, #ff4f7a 30%, #7d2bd4 68%, #2a9d8f 100%);
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-family: "Trebuchet MS", "Helvetica Neue", Helvetica, Arial, sans-serif;
-        font-style: italic;
-        font-weight: 900;
-        font-size: 2.15rem;
-        line-height: 0.9;
-        letter-spacing: 0.03em;
-        transform: rotate(-2deg) skewY(-2deg);
-        text-shadow:
-          0.03em 0.03em 0 rgba(255, 255, 255, 0.3),
-          0.08em 0.08em 0 rgba(125, 43, 212, 0.12);
+        gap: 0.02em;
+        padding: 0.34em 0.92em 0.5em 1em;
+        min-height: 2.35em;
+        border-radius: 18px;
+        border: 1px solid rgba(129, 182, 76, 0.24);
+        background: linear-gradient(180deg, rgba(129, 182, 76, 0.14) 0%, rgba(53, 64, 44, 0.22) 100%);
+        font-size: 1.95rem;
+        line-height: 0.84;
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.05),
+          0 10px 20px rgba(0, 0, 0, 0.12);
       }
 
       .tricksy-logo::after {
         content: "";
         position: absolute;
-        left: 0.16em;
-        right: 0.06em;
-        bottom: -0.02em;
-        height: 0.4em;
+        left: 0.9em;
+        right: 0.9em;
+        bottom: 0.34em;
+        height: 0.16em;
         border-radius: 999px;
+        background: linear-gradient(90deg, rgba(129, 182, 76, 0.92), rgba(226, 187, 98, 0.64));
+        box-shadow: 0 0 12px rgba(129, 182, 76, 0.14);
+      }
+
+      .tricksy-logo .tri {
+        color: #eff3e3;
+        font-family: Georgia, "Times New Roman", serif;
+        font-style: italic;
+        font-weight: 700;
+        letter-spacing: -0.04em;
+      }
+
+      .tricksy-logo .ck {
+        position: relative;
+        top: 0.02em;
+        color: #b8d47f;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.08em;
+        text-transform: lowercase;
+      }
+
+      .tricksy-logo .wink {
+        position: relative;
+        width: 0.56em;
+        height: 0.56em;
+        margin: 0 0.02em 0 0.01em;
+        border-radius: 50%;
         background:
-          radial-gradient(circle at 18% 50%, rgba(255, 140, 66, 0.45) 0 22%, transparent 24%),
-          radial-gradient(circle at 52% 50%, rgba(255, 79, 122, 0.35) 0 18%, transparent 20%),
-          linear-gradient(90deg, rgba(255, 140, 66, 0.22), rgba(125, 43, 212, 0.2), rgba(42, 157, 143, 0.22));
-        transform: rotate(-1deg) skewX(-10deg);
-        z-index: -1;
+          radial-gradient(circle at 40% 38%, #eef5dd 0 0.1em, transparent 0.11em),
+          radial-gradient(circle at 52% 52%, #32401c 0 0.2em, #d6e8ac 0.21em 100%);
+        box-shadow: 0 0 0 0.08em rgba(120, 163, 67, 0.22);
+        transform: translateY(0.02em);
+      }
+
+      .tricksy-logo .wink::after {
+        content: "";
+        position: absolute;
+        left: 0.06em;
+        right: 0.02em;
+        bottom: 0.1em;
+        height: 0.14em;
+        border-radius: 999px;
+        background: linear-gradient(90deg, rgba(226, 187, 98, 0.95), rgba(129, 182, 76, 0.85));
+        transform: rotate(-8deg);
+      }
+
+      .tricksy-logo .sy {
+        color: #efe5cb;
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 900;
+        letter-spacing: -0.05em;
+      }
+
+      .route-card > a {
+        margin-top: auto;
       }
 
       @media (max-width: 1280px) {
@@ -352,9 +402,9 @@
             <h1>Michael Trounce</h1>
             <p class="intro">
               Builder of EM and Global Macro products. I’m actively looking for
-              my next role, I build serious digital products for investment
-              professionals under <strong>Proton</strong>, and I make playful
-              games under the <span class="tricksy-word">Tricksy</span> label.
+              my next role, I build serious self-updating desktop dashboards as
+              <strong>Knowledge Machines</strong>, and I make playful games
+              under the <span class="tricksy-word">Tricksy</span> label.
             </p>
           </div>
           <div class="hero-meta">
@@ -373,30 +423,37 @@
       </section>
 
       <section class="section-card" aria-label="Homepage sections">
-        <p class="eyebrow">Site Paths</p>
-        <h2>Three paths.</h2>
         <div class="routes-grid">
           <article class="route-card">
             <p class="route-kicker">1. Professional</p>
             <div class="profile-avatar" aria-hidden="true"></div>
             <h3>Hiring path</h3>
-            <p>I’m looking for a job, so this route is for employers who want a fuller professional picture.</p>
+            <p>
+              I’m looking to join a global macro or emerging markets macro pod,
+              especially one where flows-and-positions analysis carries real
+              weight in the investment process.
+            </p>
             <a href="./Professional/">Open Professional</a>
           </article>
 
           <article class="route-card proton-card">
-            <div class="proton-logo">Proton</div>
-            <h3>Products brand</h3>
-            <p>Serious digital products for investment professionals. This is the commercial, no-nonsense side.</p>
-            <a href="./Proton/" class="proton-link">Open Proton</a>
+            <div class="proton-logo">Knowledge Machines</div>
+            <h3>Dashboard / Database</h3>
+            <p>
+              Self-updating situation monitors you can keep open on your
+              desktop while you work.
+            </p>
+            <a href="./Knowledge-Machines/" class="proton-link">Open Knowledge Machines</a>
           </article>
 
           <article class="route-card">
-            <div class="tricksy-logo">Tricksy</div>
-            <h3>Fun and games</h3>
+            <div class="tricksy-logo" aria-label="Tricksy">
+              <span class="tri">Tri</span><span class="ck">ck</span><span class="wink" aria-hidden="true"></span><span class="sy">sy</span>
+            </div>
+            <h3>Games / Experiments</h3>
             <p>
-              Playful releases live here under the Tricksy label, including
-              Lula, Snake, and Kaboom.
+              Playful releases and side projects you can open for fun,
+              including Lula, a game for budding politicans and macro traders.
             </p>
             <a href="./Tricksy/">Open Tricksy</a>
           </article>

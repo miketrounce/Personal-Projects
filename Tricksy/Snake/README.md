@@ -2,7 +2,7 @@
 
 Play it here:
 
-[https://miketrounce.github.io/Personal-Projects/snake/](https://miketrounce.github.io/Personal-Projects/snake/)
+[https://miketrounce.github.io/Tricksy/Snake/](https://miketrounce.github.io/Tricksy/Snake/)
 
 A minimal browser-based Snake game built with plain HTML, CSS, and JavaScript.
 
@@ -14,7 +14,7 @@ From the repo root:
 npm start
 ```
 
-Then open [http://localhost:4173/snake/](http://localhost:4173/snake/).
+Then open [http://localhost:4173/Tricksy/Snake/](http://localhost:4173/Tricksy/Snake/).
 
 ## Run tests
 

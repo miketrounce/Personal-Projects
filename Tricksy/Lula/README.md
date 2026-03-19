@@ -2,7 +2,7 @@
 
 Live page:
 
-[https://miketrounce.github.io/Personal-Projects/Lula/](https://miketrounce.github.io/Personal-Projects/Lula/)
+[https://miketrounce.github.io/Tricksy/Lula/](https://miketrounce.github.io/Tricksy/Lula/)
 
 A small browser game with two variants:
 - `Politician`: control one economy directly and try to run it well over a fixed term
@@ -17,7 +17,7 @@ From the repo root:
 npm start
 ```
 
-Then open [http://localhost:4173/Lula/](http://localhost:4173/Lula/).
+Then open [http://localhost:4173/Tricksy/Lula/](http://localhost:4173/Tricksy/Lula/).
 
 ## Goal
 
@@ -43,8 +43,8 @@ Pick a country-inspired starting economy, then play through an eight year term.
 ## Supabase leaderboard setup
 
 1. Create a Supabase project.
-2. In the SQL editor, run the contents of [`supabase.sql`](/Users/michaeltrounce/Documents/New project/Lula/supabase.sql).
-3. Open [`src/supabase-config.js`](/Users/michaeltrounce/Documents/New project/Lula/src/supabase-config.js).
+2. In the SQL editor, run the contents of [`supabase.sql`](/Users/michaeltrounce/Documents/New project/Tricksy/Lula/supabase.sql).
+3. Open [`src/supabase-config.js`](/Users/michaeltrounce/Documents/New project/Tricksy/Lula/src/supabase-config.js).
 4. Paste your Supabase project URL and anon key into:
 
 ```js

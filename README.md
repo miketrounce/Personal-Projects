@@ -1,27 +1,43 @@
-# Personal Projects
+# miketrounce.github.io
 
-A home for small personal builds, with each project kept in its own folder.
+Personal site repository with a split between professional material and the
+playful `Tricksy` projects.
 
 ## Projects
 
+### Home
+
+- Folder: [`/`](/Users/michaeltrounce/Documents/New project)
+- Live site: [https://miketrounce.github.io/](https://miketrounce.github.io/)
+
+Root landing page that routes visitors into the professional side or the
+Tricksy side.
+
+### Professional
+
+- Folder: [`Professional/`](/Users/michaeltrounce/Documents/New project/Professional)
+- Live site: [https://miketrounce.github.io/Professional/](https://miketrounce.github.io/Professional/)
+
+Professional-facing page for background, work style, and contact details.
+
+### Tricksy
+
+- Folder: [`Tricksy/`](/Users/michaeltrounce/Documents/New project/Tricksy)
+- Live site: [https://miketrounce.github.io/Tricksy/](https://miketrounce.github.io/Tricksy/)
+
+Umbrella page for small games, playful experiments, and personal builds.
+
 ### Snake
 
-- Folder: [`snake/`](/Users/michaeltrounce/Documents/New project/snake)
-- Live site: [https://miketrounce.github.io/Personal-Projects/snake/](https://miketrounce.github.io/Personal-Projects/snake/)
+- Folder: [`Tricksy/Snake/`](/Users/michaeltrounce/Documents/New project/Tricksy/Snake)
+- Live site: [https://miketrounce.github.io/Tricksy/Snake/](https://miketrounce.github.io/Tricksy/Snake/)
 
 Classic browser-based Snake built with plain HTML, CSS, and JavaScript.
 
-### Personal Portfolio
-
-- Folder: [`portfolio/`](/Users/michaeltrounce/Documents/New project/portfolio)
-- Live site: [https://miketrounce.github.io/Personal-Projects/portfolio/](https://miketrounce.github.io/Personal-Projects/portfolio/)
-
-A personal portfolio starter page for showcasing work and contact details.
-
 ### Lula
 
-- Folder: [`Lula/`](/Users/michaeltrounce/Documents/New project/Lula)
-- Live site: [https://miketrounce.github.io/Personal-Projects/Lula/](https://miketrounce.github.io/Personal-Projects/Lula/)
+- Folder: [`Tricksy/Lula/`](/Users/michaeltrounce/Documents/New project/Tricksy/Lula)
+- Live site: [https://miketrounce.github.io/Tricksy/Lula/](https://miketrounce.github.io/Tricksy/Lula/)
 
 A macro strategy game with Politician and Trader variants, daily challenges, and a live leaderboard.
 
@@ -33,7 +49,8 @@ From the repo root:
 npm start
 ```
 
-Then open [http://localhost:4173](http://localhost:4173) and click into the project you want.
+Then open [http://localhost:4173](http://localhost:4173) and navigate to the
+route you want to preview.
 
 ## Run tests
 
@@ -46,8 +63,9 @@ npm test
 ## Repo structure
 
 ```text
-Personal-Projects/
-  Lula/
-  portfolio/
-  snake/
+miketrounce.github.io/
+  Professional/
+  Tricksy/
+    Lula/
+    Snake/
 ```

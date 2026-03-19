@@ -1,6 +1,16 @@
 # Classic Snake
 
+Play it here:
+
+[https://miketrounce.github.io/Personal-Projects/](https://miketrounce.github.io/Personal-Projects/)
+
 A minimal browser-based Snake game built with plain HTML, CSS, and JavaScript.
+
+## Play online
+
+Open the GitHub Pages site:
+
+[https://miketrounce.github.io/Personal-Projects/](https://miketrounce.github.io/Personal-Projects/)
 
 ## Run locally
 

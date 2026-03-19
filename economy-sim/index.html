@@ -100,6 +100,38 @@
         </div>
         <ol id="history" class="history"></ol>
       </section>
+
+      <section class="layout leaderboard-layout">
+        <section class="panel leaderboard-panel">
+          <div class="section-title">
+            <p class="eyebrow">Leaderboard</p>
+            <h2>Best terms</h2>
+          </div>
+          <p class="status" id="leaderboard-status">
+            Leaderboard is loading.
+          </p>
+          <ol id="leaderboard" class="leaderboard-list"></ol>
+        </section>
+
+        <section class="panel submit-panel">
+          <div class="section-title">
+            <p class="eyebrow">Submit score</p>
+            <h2>Share your result</h2>
+          </div>
+          <form id="submit-form" class="policy-form">
+            <label>
+              <span>Name</span>
+              <input id="player-name" name="playerName" type="text" maxlength="40" placeholder="Your name" />
+            </label>
+            <p class="status" id="submit-status">
+              Finish a run to submit your score.
+            </p>
+            <div class="actions">
+              <button type="submit" id="submit-button">Submit score</button>
+            </div>
+          </form>
+        </section>
+      </section>
     </main>
 
     <script type="module" src="./src/main.js"></script>

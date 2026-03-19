@@ -4,13 +4,20 @@ import {
   getScore,
   getSummaryMessage
 } from "./economy.js";
+import { SUPABASE_ANON_KEY, SUPABASE_URL } from "./supabase-config.js";
 
 const statsElement = document.querySelector("#stats");
 const statusElement = document.querySelector("#status");
 const historyElement = document.querySelector("#history");
 const macroChartElement = document.querySelector("#macro-chart");
 const socialChartElement = document.querySelector("#social-chart");
+const leaderboardElement = document.querySelector("#leaderboard");
+const leaderboardStatusElement = document.querySelector("#leaderboard-status");
 const form = document.querySelector("#policy-form");
+const submitForm = document.querySelector("#submit-form");
+const submitButton = document.querySelector("#submit-button");
+const submitStatusElement = document.querySelector("#submit-status");
+const playerNameInput = document.querySelector("#player-name");
 const restartButton = document.querySelector("#restart-button");
 const advanceButton = document.querySelector("#advance-button");
 
@@ -27,9 +34,110 @@ const outputs = {
 };
 
 let state = createInitialState();
+let supabase = null;
+let leaderboardEnabled = false;
 
 function formatPercent(value) {
   return `${Number(value).toFixed(1)}%`;
+}
+
+function isSupabaseConfigured() {
+  return Boolean(SUPABASE_URL && SUPABASE_ANON_KEY);
+}
+
+async function initializeSupabase() {
+  if (!isSupabaseConfigured()) {
+    leaderboardStatusElement.textContent =
+      "Leaderboard is disabled until Supabase is configured.";
+    submitStatusElement.textContent =
+      "Add your Supabase project URL and anon key to enable score sharing.";
+    submitButton.disabled = true;
+    return;
+  }
+
+  const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2");
+  supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  leaderboardEnabled = true;
+  submitButton.disabled = state.status !== "finished";
+  await loadLeaderboard();
+}
+
+async function loadLeaderboard() {
+  if (!leaderboardEnabled) {
+    leaderboardElement.innerHTML = "<li>Leaderboard unavailable.</li>";
+    return;
+  }
+
+  leaderboardStatusElement.textContent = "Loading latest scores...";
+  const { data, error } = await supabase
+    .from("economy_sim_scores")
+    .select("player_name, score, gdp, created_at")
+    .order("score", { ascending: false })
+    .order("created_at", { ascending: false })
+    .limit(10);
+
+  if (error) {
+    leaderboardStatusElement.textContent = "Could not load leaderboard.";
+    leaderboardElement.innerHTML = `<li>${error.message}</li>`;
+    return;
+  }
+
+  leaderboardStatusElement.textContent = "Top 10 GDP gains across all players.";
+  leaderboardElement.innerHTML =
+    data.length === 0
+      ? "<li>No scores yet. Be the first to submit one.</li>"
+      : data
+          .map(
+            (entry, index) =>
+              `<li><strong>#${index + 1} ${entry.player_name}</strong> scored ${Number(
+                entry.score
+              ).toFixed(1)} GDP points and finished at GDP ${Number(entry.gdp).toFixed(1)}.</li>`
+          )
+          .join("");
+}
+
+async function submitScore(event) {
+  event.preventDefault();
+
+  if (!leaderboardEnabled) {
+    submitStatusElement.textContent =
+      "Supabase is not configured yet, so score submission is disabled.";
+    return;
+  }
+
+  if (state.status !== "finished") {
+    submitStatusElement.textContent = "Finish a run before submitting a score.";
+    return;
+  }
+
+  const playerName = playerNameInput.value.trim();
+  if (!playerName) {
+    submitStatusElement.textContent = "Enter your name before submitting.";
+    return;
+  }
+
+  submitStatusElement.textContent = "Submitting score...";
+  submitButton.disabled = true;
+
+  const { error } = await supabase.from("economy_sim_scores").insert({
+    player_name: playerName,
+    score: getScore(state),
+    gdp: state.gdp,
+    debt: state.debt,
+    inflation: state.inflation,
+    unemployment: state.unemployment,
+    years_completed: state.history.length
+  });
+
+  if (error) {
+    submitStatusElement.textContent = `Could not submit score: ${error.message}`;
+    submitButton.disabled = false;
+    return;
+  }
+
+  submitStatusElement.textContent = "Score submitted.";
+  await loadLeaderboard();
+  submitButton.disabled = false;
 }
 
 function syncOutputs() {
@@ -100,10 +208,7 @@ function buildLine(points, xScale, yScale) {
 }
 
 function renderChart(chartElement, series, points) {
-  const basePoints = [
-    points[0],
-    ...points.slice(1)
-  ];
+  const basePoints = points;
 
   const maxValue = Math.max(
     ...basePoints.flatMap((point) => series.map((item) => point[item.key])),
@@ -133,6 +238,17 @@ function renderChart(chartElement, series, points) {
         )}" fill="none" stroke="${item.color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />`
     )
     .join("");
+  const markers = series
+    .map((item) =>
+      basePoints
+        .map((point, index) => {
+          const x = 56 + index * xScale;
+          const y = 196 - point[item.key] * yScale;
+          return `<circle cx="${x}" cy="${y}" r="4" fill="${item.color}" />`;
+        })
+        .join("")
+    )
+    .join("");
 
   const highLabel = maxValue >= 20 ? Math.round(maxValue).toString() : maxValue.toFixed(1);
 
@@ -142,6 +258,7 @@ function renderChart(chartElement, series, points) {
     <line x1="56" y1="196" x2="576" y2="196" stroke="#bcae97" stroke-width="1.5" />
     <line x1="56" y1="36" x2="56" y2="196" stroke="#bcae97" stroke-width="1.5" />
     ${paths}
+    ${markers}
     ${axisLabels}
     <text x="18" y="40" font-size="11" fill="#6d6458">${highLabel}</text>
     <text x="28" y="196" font-size="11" fill="#6d6458">0</text>
@@ -188,6 +305,12 @@ function render() {
   Object.values(fields).forEach((field) => {
     field.disabled = disabled;
   });
+  if (leaderboardEnabled) {
+    submitButton.disabled = state.status !== "finished";
+    if (state.status === "finished") {
+      submitStatusElement.textContent = "Run finished. Enter your name to submit.";
+    }
+  }
 }
 
 Object.values(fields).forEach((field) => {
@@ -200,6 +323,8 @@ form.addEventListener("submit", (event) => {
   render();
 });
 
+submitForm.addEventListener("submit", submitScore);
+
 restartButton.addEventListener("click", () => {
   state = createInitialState();
   syncOutputs();
@@ -208,3 +333,4 @@ restartButton.addEventListener("click", () => {
 
 syncOutputs();
 render();
+initializeSupabase();

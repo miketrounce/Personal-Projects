@@ -7,54 +7,119 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <main class="app">
-      <section class="game-shell" aria-label="Snake game">
-        <header class="hud">
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a href="../" class="brand" aria-label="Tricksy home">
+          <span class="brand-mark">T</span>
           <div>
-            <p class="eyebrow">Classic Snake</p>
-            <h1>Keep moving. Keep growing.</h1>
+            <p class="brand-eyebrow">Tricksy</p>
+            <strong>Snake</strong>
           </div>
-          <div class="stats" aria-live="polite">
-            <div class="stat">
-              <span>Score</span>
-              <strong id="score">0</strong>
+        </a>
+
+        <nav class="nav">
+          <a href="./" class="nav-item active">
+            <span class="nav-icon" aria-hidden="true">▶</span>
+            <span>Play</span>
+          </a>
+          <a href="../Kaboom/" class="nav-item">
+            <span class="nav-icon" aria-hidden="true">⚗</span>
+            <span>Kaboom</span>
+          </a>
+          <a href="../Lula/" class="nav-item">
+            <span class="nav-icon" aria-hidden="true">◫</span>
+            <span>Lula</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-card">
+          <p class="sidebar-label">Age Guide</p>
+          <strong>7+</strong>
+          <p>Easy to pick up, quick to restart, and simple enough for younger players.</p>
+        </div>
+
+        <div class="sidebar-card muted">
+          <p class="sidebar-label">Controls</p>
+          <strong>Keyboard or touch</strong>
+          <p>Use arrow keys or WASD, or tap the on-screen controls.</p>
+        </div>
+      </aside>
+
+      <main class="page">
+        <section class="hero-card panel">
+          <div class="hero-top">
+            <div>
+              <p class="eyebrow">Tricksy Arcade</p>
+              <h1>Classic Snake</h1>
+              <p class="intro">
+                Keep moving, keep growing, and keep the run alive long enough to
+                stack up a satisfying score.
+              </p>
             </div>
-            <div class="stat">
-              <span>Status</span>
+            <div class="profile-card">
+              <p class="sidebar-label">Current run</p>
               <strong id="status">Ready</strong>
+              <p class="profile-note">Simple rules, fast loops, and no waiting around.</p>
             </div>
           </div>
-        </header>
+        </section>
 
-        <div class="board-wrap">
-          <div
-            id="board"
-            class="board"
-            role="grid"
-            aria-label="Snake board"
-          ></div>
-        </div>
+        <section class="dashboard-grid">
+          <section class="main-column">
+            <section class="panel game-shell" aria-label="Snake game">
+              <div class="section-title">
+                <p class="eyebrow">Board</p>
+                <h2>Stay alive</h2>
+              </div>
 
-        <div class="actions">
-          <button id="pause-button" type="button">Pause</button>
-          <button id="restart-button" type="button">Restart</button>
-        </div>
+              <div class="board-wrap">
+                <div
+                  id="board"
+                  class="board"
+                  role="grid"
+                  aria-label="Snake board"
+                ></div>
+              </div>
+            </section>
+          </section>
 
-        <p class="instructions">
-          Use arrow keys or WASD to move. Press Space to pause. Restart after
-          game over.
-        </p>
+          <aside class="side-column">
+            <section class="panel controls-panel">
+              <div class="section-title">
+                <p class="eyebrow">Dashboard</p>
+                <h2>Play the next move</h2>
+              </div>
 
-        <div class="controls" aria-label="Touch controls">
-          <button type="button" data-direction="up">Up</button>
-          <div class="controls-row">
-            <button type="button" data-direction="left">Left</button>
-            <button type="button" data-direction="down">Down</button>
-            <button type="button" data-direction="right">Right</button>
-          </div>
-        </div>
-      </section>
-    </main>
+              <div class="stats" aria-live="polite">
+                <div class="stat">
+                  <span>Score</span>
+                  <strong id="score">0</strong>
+                </div>
+              </div>
+
+              <div class="actions">
+                <button id="pause-button" type="button">Pause</button>
+                <button id="restart-button" type="button" class="secondary">Restart</button>
+              </div>
+
+              <p class="instructions">
+                Use arrow keys or WASD to move. Press Space to pause. Restart after
+                game over.
+              </p>
+
+              <div class="controls" aria-label="Touch controls">
+                <button type="button" data-direction="up">Up</button>
+                <div class="controls-row">
+                  <button type="button" data-direction="left">Left</button>
+                  <button type="button" data-direction="down">Down</button>
+                  <button type="button" data-direction="right">Right</button>
+                </div>
+              </div>
+            </section>
+          </aside>
+        </section>
+      </main>
+    </div>
 
     <script type="module" src="./src/main.js"></script>
   </body>

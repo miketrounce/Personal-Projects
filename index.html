@@ -5,6 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Michael Trounce</title>
     <link rel="stylesheet" href="./portfolio/styles.css" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --panel: #34312d;
+        --panel-strong: #3a3632;
+        --border: #45403a;
+        --accent: #81b64c;
+        --accent-dark: #6aa23d;
+        --muted: #b8b0a4;
+      }
+
+      body {
+        background:
+          radial-gradient(circle at top left, rgba(129, 182, 76, 0.1), transparent 24%),
+          linear-gradient(180deg, #322f2c 0%, #2b2926 100%);
+      }
+
+      .hero,
+      .card,
+      .project-card,
+      .contact-card {
+        background: var(--panel);
+        border-color: var(--border);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+      }
+
+      .project-card {
+        background: linear-gradient(180deg, #3b3833 0%, #2f2c28 100%);
+      }
+
+      h1,
+      h2,
+      h3 {
+        color: #f4f2ec;
+      }
+
+      p,
+      li {
+        color: var(--muted);
+      }
+
+      .eyebrow,
+      .project-type {
+        color: #c9c1b4;
+      }
+
+      a {
+        background: linear-gradient(180deg, #81b64c 0%, #6aa23d 100%);
+        color: #1f231a;
+      }
+
+      a.secondary {
+        background: transparent;
+        color: #f4f2ec;
+        border-color: var(--border);
+      }
+
+      .contact-card a {
+        background: transparent;
+        color: #a9d470;
+      }
+    </style>
   </head>
   <body>
     <main class="page">

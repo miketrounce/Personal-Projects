@@ -327,11 +327,25 @@ input[type="text"] {
 }
 
 select {
+  appearance: none;
+  -webkit-appearance: none;
   width: 100%;
-  padding: 12px 14px;
+  min-height: 48px;
+  padding: 12px 42px 12px 14px;
   border-radius: 12px;
   border: 1px solid var(--border);
   font: inherit;
+  color: #1e1c18;
+  -webkit-text-fill-color: #1e1c18;
+  background:
+    linear-gradient(45deg, transparent 50%, #6d6458 50%) calc(100% - 20px)
+      calc(50% - 3px) / 8px 8px no-repeat,
+    linear-gradient(135deg, #6d6458 50%, transparent 50%) calc(100% - 14px)
+      calc(50% - 3px) / 8px 8px no-repeat,
+    #fff;
+}
+
+select option {
   color: #1e1c18;
   background: #fff;
 }

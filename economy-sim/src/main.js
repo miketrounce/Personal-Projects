@@ -8,7 +8,8 @@ import {
 const statsElement = document.querySelector("#stats");
 const statusElement = document.querySelector("#status");
 const historyElement = document.querySelector("#history");
-const chartElement = document.querySelector("#chart");
+const macroChartElement = document.querySelector("#macro-chart");
+const socialChartElement = document.querySelector("#social-chart");
 const form = document.querySelector("#policy-form");
 const restartButton = document.querySelector("#restart-button");
 const advanceButton = document.querySelector("#advance-button");
@@ -98,45 +99,16 @@ function buildLine(points, xScale, yScale) {
     .join(" ");
 }
 
-function renderChart() {
-  const series = [
-    { key: "gdp", color: "#29594f", label: "GDP" },
-    { key: "debt", color: "#9a4d2f", label: "Debt" },
-    { key: "inflation", color: "#3f6db1", label: "Inflation" },
-    { key: "unemployment", color: "#8f6bb3", label: "Unemployment" }
-  ];
-
+function renderChart(chartElement, series, points) {
   const basePoints = [
-    {
-      gdp: 100,
-      debt: 62,
-      inflation: 2.1,
-      unemployment: 5.4
-    },
-    ...state.history.map((entry) => ({
-      gdp: entry.nextGdp,
-      debt: entry.nextDebt,
-      inflation: entry.inflation,
-      unemployment: entry.unemployment
-    }))
+    points[0],
+    ...points.slice(1)
   ];
 
   const maxValue = Math.max(
-    ...basePoints.flatMap((point) => [
-      point.gdp,
-      point.debt,
-      point.inflation * 10,
-      point.unemployment * 10
-    ]),
-    100
+    ...basePoints.flatMap((point) => series.map((item) => point[item.key])),
+    1
   );
-  const normalizedPoints = basePoints.map((point) => ({
-    gdp: point.gdp,
-    debt: point.debt,
-    inflation: point.inflation * 10,
-    unemployment: point.unemployment * 10
-  }));
-
   const xScale = basePoints.length > 1 ? 520 / (basePoints.length - 1) : 0;
   const yScale = 160 / maxValue;
   const axisLabels = basePoints
@@ -155,12 +127,14 @@ function renderChart() {
     .map(
       (item) =>
         `<path d="${buildLine(
-          normalizedPoints.map((point) => point[item.key]),
+          basePoints.map((point) => point[item.key]),
           xScale,
           yScale
         )}" fill="none" stroke="${item.color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />`
     )
     .join("");
+
+  const highLabel = maxValue >= 20 ? Math.round(maxValue).toString() : maxValue.toFixed(1);
 
   chartElement.innerHTML = `
     <rect x="0" y="0" width="640" height="240" rx="16" fill="#fffaf1"></rect>
@@ -169,14 +143,44 @@ function renderChart() {
     <line x1="56" y1="36" x2="56" y2="196" stroke="#bcae97" stroke-width="1.5" />
     ${paths}
     ${axisLabels}
-    <text x="24" y="40" font-size="11" fill="#6d6458">High</text>
-    <text x="26" y="196" font-size="11" fill="#6d6458">Low</text>
+    <text x="18" y="40" font-size="11" fill="#6d6458">${highLabel}</text>
+    <text x="28" y="196" font-size="11" fill="#6d6458">0</text>
   `;
 }
 
 function render() {
+  const chartPoints = [
+    {
+      gdp: 100,
+      debt: 62,
+      inflation: 2.1,
+      unemployment: 5.4
+    },
+    ...state.history.map((entry) => ({
+      gdp: entry.nextGdp,
+      debt: entry.nextDebt,
+      inflation: entry.inflation,
+      unemployment: entry.unemployment
+    }))
+  ];
+
   renderStats();
-  renderChart();
+  renderChart(
+    macroChartElement,
+    [
+      { key: "gdp", color: "#29594f" },
+      { key: "debt", color: "#9a4d2f" }
+    ],
+    chartPoints
+  );
+  renderChart(
+    socialChartElement,
+    [
+      { key: "inflation", color: "#3f6db1" },
+      { key: "unemployment", color: "#8f6bb3" }
+    ],
+    chartPoints
+  );
   renderHistory();
   statusElement.textContent = getSummaryMessage(state);
   const disabled = state.status === "finished";

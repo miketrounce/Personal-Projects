@@ -62,23 +62,40 @@
           <p class="eyebrow">Timeline</p>
           <h2>What happened each year</h2>
         </div>
-        <div class="chart-panel">
-          <div class="chart-header">
-            <h3>Economic trends</h3>
-            <p>GDP, debt, inflation, and unemployment across the term.</p>
+        <div class="chart-grid">
+          <div class="chart-panel">
+            <div class="chart-header">
+              <h3>Output and debt</h3>
+              <p>GDP and debt across the term.</p>
+            </div>
+            <svg
+              id="macro-chart"
+              class="chart"
+              viewBox="0 0 640 240"
+              role="img"
+              aria-label="GDP and debt chart"
+            ></svg>
+            <div class="legend">
+              <span><i class="gdp"></i>GDP</span>
+              <span><i class="debt"></i>Debt</span>
+            </div>
           </div>
-          <svg
-            id="chart"
-            class="chart"
-            viewBox="0 0 640 240"
-            role="img"
-            aria-label="Economic trends chart"
-          ></svg>
-          <div class="legend">
-            <span><i class="gdp"></i>GDP</span>
-            <span><i class="debt"></i>Debt</span>
-            <span><i class="inflation"></i>Inflation</span>
-            <span><i class="unemployment"></i>Unemployment</span>
+          <div class="chart-panel">
+            <div class="chart-header">
+              <h3>Prices and labor</h3>
+              <p>Inflation and unemployment across the term.</p>
+            </div>
+            <svg
+              id="social-chart"
+              class="chart"
+              viewBox="0 0 640 240"
+              role="img"
+              aria-label="Inflation and unemployment chart"
+            ></svg>
+            <div class="legend">
+              <span><i class="inflation"></i>Inflation</span>
+              <span><i class="unemployment"></i>Unemployment</span>
+            </div>
           </div>
         </div>
         <ol id="history" class="history"></ol>

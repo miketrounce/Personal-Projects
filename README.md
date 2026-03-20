@@ -1,7 +1,6 @@
 # miketrounce.github.io
 
-Personal site repository with a split between professional material and the
-playful `Tricksy` projects.
+Personal site repository.
 
 ## Projects
 
@@ -10,8 +9,7 @@ playful `Tricksy` projects.
 - Folder: [`/`](/Users/michaeltrounce/Documents/New project)
 - Live site: [https://miketrounce.github.io/](https://miketrounce.github.io/)
 
-Root landing page that routes visitors into the professional side or the
-Tricksy side.
+Root landing page that routes visitors into one of three choices.
 
 ### Professional
 
@@ -25,7 +23,7 @@ Professional-facing page for background, work style, and contact details.
 - Folder: [`Knowledge-Machines/`](/Users/michaeltrounce/Documents/New project/Knowledge-Machines)
 - Live site: [https://miketrounce.github.io/Knowledge-Machines/](https://miketrounce.github.io/Knowledge-Machines/)
 
-Brand page for the serious knowledge machines I make and sell to investment
+Brand page for an idea I have for after my gardening leave at Exante Data finishes
 professionals.
 
 ### Tricksy
@@ -33,7 +31,7 @@ professionals.
 - Folder: [`Tricksy/`](/Users/michaeltrounce/Documents/New project/Tricksy)
 - Live site: [https://miketrounce.github.io/Tricksy/](https://miketrounce.github.io/Tricksy/)
 
-Umbrella page for small games, playful experiments, and personal builds.
+Umbrella page for small games, playful experiments, and personal builds I'm working on during my gardening leave.
 
 ### Kaboom
 

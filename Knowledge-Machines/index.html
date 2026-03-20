@@ -47,7 +47,57 @@
       }
 
       .hero {
-        padding: 30px;
+        padding: 48px 40px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+      }
+
+      .hero-left {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .hero-graphic {
+        width: 100%;
+        aspect-ratio: 4/3;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #1a2436 0%, #0f1720 100%);
+        border: 1px solid var(--border);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .hero-graphic svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      @media (max-width: 900px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .hero-title {
+        display: inline-block;
+        font-size: clamp(2.8rem, 7vw, 5.4rem);
+        font-weight: 900;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        margin: 0 0 6px;
+        padding-bottom: 14px;
+        border-bottom: 5px solid var(--accent);
+      }
+
+      .hero-subtitle {
+        font-size: clamp(1.3rem, 3vw, 2rem);
+        font-weight: 400;
+        color: var(--muted);
+        margin: 24px 0 16px;
+        line-height: 1.3;
       }
 
       .eyebrow {
@@ -126,6 +176,110 @@
         background: linear-gradient(180deg, var(--panel-strong) 0%, #151d28 100%);
       }
 
+      .product-card {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .product-card .card-map {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 140px;
+        opacity: 0.35;
+      }
+
+      .product-card h2 {
+        font-size: 1.8rem;
+        margin-bottom: 6px;
+      }
+
+      .product-footer {
+        margin-top: auto;
+        padding-top: 16px;
+        display: flex;
+        gap: 10px;
+      }
+
+      .product-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(180deg, var(--accent) 0%, var(--accent-strong) 100%);
+        color: #0d1724;
+        font-weight: 700;
+        font-size: 0.95rem;
+        padding: 10px 24px;
+        border-radius: 12px;
+        text-decoration: none;
+        letter-spacing: 0.01em;
+        transition: filter 0.15s;
+      }
+
+      .product-btn:hover {
+        filter: brightness(1.1);
+      }
+
+      .checkout-btn {
+        background: linear-gradient(180deg, #28c840 0%, #1fa033 100%);
+      }
+
+      .product-badge {
+        display: inline-block;
+        padding: 8px 18px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+      }
+
+      /* Video modal */
+      .video-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        background: rgba(0, 0, 0, 0.85);
+        align-items: center;
+        justify-content: center;
+      }
+
+      .video-overlay.open {
+        display: flex;
+      }
+
+      .video-wrapper {
+        position: relative;
+        width: min(90vw, 960px);
+        aspect-ratio: 16/9;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+      }
+
+      .video-wrapper iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .video-close {
+        position: absolute;
+        top: -44px;
+        right: 0;
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 2rem;
+        cursor: pointer;
+        padding: 4px 12px;
+      }
+
       @media (max-width: 900px) {
         .grid {
           grid-template-columns: 1fr;
@@ -136,51 +290,189 @@
   <body>
     <main>
       <section class="hero">
-        <p class="eyebrow">Knowledge Machines</p>
-        <h1>Dashboard Databases</h1>
-        <p>
-          Knowledge Machines is the umbrella label for a collection of desktop
-          situation monitors that I build. Each one is a dashboard you can keep
-          open while you work, and it keeps itself updated by going out and
-          fetching the latest information.
-        </p>
-        <div class="hero-actions">
-          <a class="primary" href="mailto:trounceflow@gmail.com">Discuss Knowledge Machines</a>
-          <a class="secondary" href="../">Back home</a>
-          <a class="secondary" href="../Professional/">Professional</a>
+        <div class="hero-left">
+          <div class="hero-title">Knowledge<br>Machines</div>
+          <p class="hero-subtitle">Your Dashboard. Your Database.</p>
+          <p>
+            A bespoke, self-updating situation monitor with in-built database and API.
+          </p>
+          <div class="hero-actions">
+            <a class="primary" href="#" onclick="openVideo(); return false;">▶</a>
+            <a class="secondary" href="../">Back home</a>
+            <a class="secondary" href="../Professional/">Professional</a>
+          </div>
+        </div>
+        <div class="hero-graphic">
+          <svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg">
+            <!-- Top bar -->
+            <rect x="0" y="0" width="480" height="36" fill="#1a2436"/>
+            <circle cx="18" cy="18" r="5" fill="#ff5f57"/>
+            <circle cx="36" cy="18" r="5" fill="#febc2e"/>
+            <circle cx="54" cy="18" r="5" fill="#28c840"/>
+            <rect x="140" y="12" width="200" height="12" rx="6" fill="#2c3b4d"/>
+
+            <!-- Sidebar -->
+            <rect x="0" y="36" width="100" height="324" fill="#151d28"/>
+            <rect x="14" y="52" width="72" height="8" rx="4" fill="#2c3b4d"/>
+            <rect x="14" y="72" width="72" height="8" rx="4" fill="#6fb5ff" opacity="0.8"/>
+            <rect x="14" y="92" width="72" height="8" rx="4" fill="#2c3b4d"/>
+            <rect x="14" y="112" width="72" height="8" rx="4" fill="#2c3b4d"/>
+            <rect x="14" y="132" width="72" height="8" rx="4" fill="#2c3b4d"/>
+            <rect x="14" y="160" width="50" height="6" rx="3" fill="#2c3b4d" opacity="0.5"/>
+            <rect x="14" y="176" width="72" height="8" rx="4" fill="#2c3b4d"/>
+            <rect x="14" y="196" width="72" height="8" rx="4" fill="#2c3b4d"/>
+
+            <!-- Main content area -->
+            <!-- KPI row -->
+            <rect x="116" y="50" width="105" height="52" rx="8" fill="#1f2938"/>
+            <rect x="126" y="60" width="40" height="6" rx="3" fill="#2c3b4d"/>
+            <text x="126" y="88" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#6fb5ff">1,247</text>
+
+            <rect x="233" y="50" width="105" height="52" rx="8" fill="#1f2938"/>
+            <rect x="243" y="60" width="40" height="6" rx="3" fill="#2c3b4d"/>
+            <text x="243" y="88" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#28c840">+12.4%</text>
+
+            <rect x="350" y="50" width="115" height="52" rx="8" fill="#1f2938"/>
+            <rect x="360" y="60" width="40" height="6" rx="3" fill="#2c3b4d"/>
+            <text x="360" y="88" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#febc2e">89.3</text>
+
+            <!-- Chart area -->
+            <rect x="116" y="116" width="348" height="140" rx="8" fill="#1f2938"/>
+            <rect x="130" y="126" width="80" height="6" rx="3" fill="#2c3b4d"/>
+            <!-- Grid lines -->
+            <line x1="130" y1="155" x2="450" y2="155" stroke="#2c3b4d" stroke-width="0.5"/>
+            <line x1="130" y1="180" x2="450" y2="180" stroke="#2c3b4d" stroke-width="0.5"/>
+            <line x1="130" y1="205" x2="450" y2="205" stroke="#2c3b4d" stroke-width="0.5"/>
+            <line x1="130" y1="230" x2="450" y2="230" stroke="#2c3b4d" stroke-width="0.5"/>
+            <!-- Area chart -->
+            <path d="M130,220 L165,210 L200,215 L235,195 L270,185 L305,175 L340,160 L375,165 L410,150 L445,145" stroke="#6fb5ff" stroke-width="2.5" fill="none"/>
+            <path d="M130,220 L165,210 L200,215 L235,195 L270,185 L305,175 L340,160 L375,165 L410,150 L445,145 L445,240 L130,240Z" fill="url(#chartGrad)" opacity="0.3"/>
+            <!-- Second line -->
+            <path d="M130,225 L165,222 L200,228 L235,218 L270,210 L305,205 L340,195 L375,200 L410,188 L445,180" stroke="#28c840" stroke-width="2" fill="none" opacity="0.7"/>
+
+            <!-- Table area -->
+            <rect x="116" y="270" width="348" height="80" rx="8" fill="#1f2938"/>
+            <rect x="130" y="282" width="60" height="6" rx="3" fill="#2c3b4d"/>
+            <rect x="220" y="282" width="60" height="6" rx="3" fill="#2c3b4d"/>
+            <rect x="310" y="282" width="60" height="6" rx="3" fill="#2c3b4d"/>
+            <rect x="400" y="282" width="40" height="6" rx="3" fill="#2c3b4d"/>
+            <line x1="130" y1="296" x2="450" y2="296" stroke="#2c3b4d" stroke-width="0.5"/>
+            <rect x="130" y="304" width="50" height="5" rx="2.5" fill="#b7c4d4" opacity="0.4"/>
+            <rect x="220" y="304" width="40" height="5" rx="2.5" fill="#b7c4d4" opacity="0.4"/>
+            <rect x="310" y="304" width="55" height="5" rx="2.5" fill="#6fb5ff" opacity="0.5"/>
+            <rect x="400" y="304" width="30" height="5" rx="2.5" fill="#28c840" opacity="0.5"/>
+            <rect x="130" y="318" width="45" height="5" rx="2.5" fill="#b7c4d4" opacity="0.4"/>
+            <rect x="220" y="318" width="55" height="5" rx="2.5" fill="#b7c4d4" opacity="0.4"/>
+            <rect x="310" y="318" width="35" height="5" rx="2.5" fill="#6fb5ff" opacity="0.5"/>
+            <rect x="400" y="318" width="35" height="5" rx="2.5" fill="#ff5f57" opacity="0.5"/>
+            <rect x="130" y="332" width="55" height="5" rx="2.5" fill="#b7c4d4" opacity="0.4"/>
+            <rect x="220" y="332" width="35" height="5" rx="2.5" fill="#b7c4d4" opacity="0.4"/>
+            <rect x="310" y="332" width="45" height="5" rx="2.5" fill="#6fb5ff" opacity="0.5"/>
+            <rect x="400" y="332" width="25" height="5" rx="2.5" fill="#28c840" opacity="0.5"/>
+
+            <defs>
+              <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#6fb5ff" stop-opacity="0.6"/>
+                <stop offset="100%" stop-color="#6fb5ff" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+          </svg>
         </div>
       </section>
 
-      <section class="grid">
-        <article class="card">
-          <p class="eyebrow">What It Is</p>
-          <h2>Situation monitors</h2>
-          <p>
-            A Knowledge Machine is meant to sit on your desktop while you work,
-            giving you an always-on view of the situation you care about.
-          </p>
+      <section class="grid" style="grid-template-columns: repeat(2, 1fr);">
+        <article class="card product-card">
+          <p class="eyebrow">First Release</p>
+          <h2>MENA</h2>
+          <p>A Middle East conflict activity tracker.</p>
+          <div class="product-footer">
+            <a class="product-btn" href="#" onclick="openVideo(); return false;">▶</a>
+            <a class="product-btn checkout-btn" href="mailto:trounceflow@gmail.com">£100</a>
+          </div>
+          <!-- Old-fashioned Gulf map -->
+          <svg class="card-map" viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
+            <!-- Parchment tint -->
+            <defs>
+              <radialGradient id="parchment" cx="50%" cy="50%" r="60%">
+                <stop offset="0%" stop-color="#d4c5a0" stop-opacity="0.15"/>
+                <stop offset="100%" stop-color="#b8a878" stop-opacity="0.05"/>
+              </radialGradient>
+            </defs>
+            <rect x="0" y="0" width="200" height="260" fill="url(#parchment)" rx="8"/>
+            <!-- Coastlines — stylised Persian Gulf / Arabian Peninsula -->
+            <!-- Saudi eastern coast -->
+            <path d="M55,30 L50,50 L48,75 L52,95 L58,110 L55,130 L50,150 L45,170 L42,190 L48,210 L60,230 L75,245"
+                  stroke="#b8a878" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <!-- Iran southern coast -->
+            <path d="M55,30 L70,28 L90,32 L110,30 L130,35 L145,42 L155,55 L160,70 L155,82 L148,90"
+                  stroke="#b8a878" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <!-- Strait of Hormuz & UAE coast -->
+            <path d="M148,90 L140,98 L130,102 L120,100 L110,105 L100,110 L90,112 L80,115 L70,120 L58,110"
+                  stroke="#b8a878" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <!-- Qatar peninsula -->
+            <path d="M82,100 L80,88 L78,80 L80,75 L84,80 L86,88 L84,100"
+                  stroke="#b8a878" stroke-width="1" fill="none" stroke-linecap="round"/>
+            <!-- Oman coast -->
+            <path d="M148,90 L158,100 L165,115 L168,135 L165,155 L158,175 L150,195 L140,210"
+                  stroke="#b8a878" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <!-- Yemen coast -->
+            <path d="M75,245 L90,248 L110,245 L130,238 L140,230 L140,210"
+                  stroke="#b8a878" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <!-- Gulf water hatching -->
+            <line x1="70" y1="50" x2="85" y2="55" stroke="#6fb5ff" stroke-width="0.3" opacity="0.4"/>
+            <line x1="75" y1="60" x2="95" y2="62" stroke="#6fb5ff" stroke-width="0.3" opacity="0.4"/>
+            <line x1="65" y1="70" x2="90" y2="72" stroke="#6fb5ff" stroke-width="0.3" opacity="0.4"/>
+            <line x1="68" y1="82" x2="100" y2="80" stroke="#6fb5ff" stroke-width="0.3" opacity="0.4"/>
+            <line x1="62" y1="92" x2="105" y2="95" stroke="#6fb5ff" stroke-width="0.3" opacity="0.3"/>
+            <!-- Place labels -->
+            <text x="30" y="140" font-family="Georgia, serif" font-size="7" fill="#b8a878" font-style="italic" opacity="0.8">Saudi</text>
+            <text x="28" y="150" font-family="Georgia, serif" font-size="7" fill="#b8a878" font-style="italic" opacity="0.8">Arabia</text>
+            <text x="120" y="60" font-family="Georgia, serif" font-size="7" fill="#b8a878" font-style="italic" opacity="0.8">Iran</text>
+            <text x="68" y="70" font-family="Georgia, serif" font-size="5.5" fill="#6fb5ff" font-style="italic" opacity="0.6">The Gulf</text>
+            <text x="150" y="150" font-family="Georgia, serif" font-size="6" fill="#b8a878" font-style="italic" opacity="0.7">Oman</text>
+            <text x="90" y="240" font-family="Georgia, serif" font-size="6" fill="#b8a878" font-style="italic" opacity="0.7">Yemen</text>
+            <text x="80" y="78" font-family="Georgia, serif" font-size="5" fill="#b8a878" font-style="italic" opacity="0.7">Qatar</text>
+            <text x="110" y="115" font-family="Georgia, serif" font-size="5" fill="#b8a878" font-style="italic" opacity="0.7">UAE</text>
+            <!-- Compass rose -->
+            <text x="170" y="22" font-family="Georgia, serif" font-size="9" fill="#b8a878" font-weight="bold" opacity="0.5">N</text>
+            <line x1="175" y1="24" x2="175" y2="35" stroke="#b8a878" stroke-width="0.8" opacity="0.4"/>
+            <polygon points="175,24 172,30 178,30" fill="#b8a878" opacity="0.4"/>
+          </svg>
         </article>
-
-        <article class="card">
-          <p class="eyebrow">How It Works</p>
-          <h2>Self-updating dashboards</h2>
-          <p>
-            The important thing is that the dashboard keeps itself updated by
-            fetching the latest information, so the user does not have to keep
-            refreshing context manually.
-          </p>
-        </article>
-
-        <article class="card">
-          <p class="eyebrow">Audience</p>
-          <h2>Built for professionals</h2>
-          <p>
-            Knowledge Machines are for investment professionals who need clear,
-            serious, always-current workflow tools while they are working on
-            their desktop computers.
-          </p>
+        <article class="card product-card">
+          <p class="eyebrow">Beta Testing</p>
+          <h2>TAIWAN</h2>
+          <p>A Taiwan activity tracker.</p>
+          <div class="product-footer">
+            <span class="product-badge">Coming Soon</span>
+          </div>
         </article>
       </section>
     </main>
+    <div class="video-overlay" id="videoOverlay" onclick="closeVideo()">
+      <div class="video-wrapper" onclick="event.stopPropagation()">
+        <button class="video-close" onclick="closeVideo()">&times;</button>
+        <iframe id="videoFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <script>
+      // Replace this URL with your real video when ready
+      const VIDEO_URL = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1';
+
+      function openVideo() {
+        document.getElementById('videoFrame').src = VIDEO_URL;
+        document.getElementById('videoOverlay').classList.add('open');
+      }
+
+      function closeVideo() {
+        document.getElementById('videoOverlay').classList.remove('open');
+        document.getElementById('videoFrame').src = '';
+      }
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeVideo();
+      });
+    </script>
   </body>
 </html>

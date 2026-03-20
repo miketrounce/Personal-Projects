@@ -189,7 +189,9 @@
         top: 50%;
         transform: translateY(-50%);
         width: 180px;
-        opacity: 1;
+        opacity: 0.4;
+        border-radius: 8px;
+        object-fit: contain;
       }
 
       .product-card h2 {
@@ -389,43 +391,7 @@
             <a class="product-btn" href="#" onclick="openVideo(); return false;">▶</a>
             <a class="product-btn checkout-btn" href="mailto:trounceflow@gmail.com">£100</a>
           </div>
-          <!-- Gulf region map — filled land masses -->
-          <svg class="card-map" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
-            <!-- Iran land mass (top-right) -->
-            <path d="M200,0 L200,50 L190,48 L178,52 L168,50 L156,56 L148,54
-                     L140,60 L134,58 L126,64 L120,62 L112,68 L106,66 L100,72
-                     L96,70 L90,76 L86,75 L82,80 L80,86 L82,92
-                     L88,96 L96,98 L104,96 L112,92 L120,90 L128,86 L134,80
-                     L140,76 L146,72 L152,70 L160,68 L170,70 L180,68 L190,72 L200,70Z"
-                  fill="#3a5068"/>
-            <!-- Arabian Peninsula (left + bottom) -->
-            <path d="M0,0 L60,0 L58,8 L56,18 L54,30 L54,42 L56,52 L58,60
-                     L60,66 L58,62 L56,56 L58,54 L60,56 L62,62 L62,68 L60,72
-                     L62,78 L66,84 L72,90 L78,94 L84,96 L90,96 L96,98
-                     L104,96 L112,92 L120,90 L128,86 L134,80 L140,76
-                     L146,72 L152,70 L160,68 L170,70 L180,68 L190,72 L200,70
-                     L200,240 L0,240Z
-                     M52,60 L50,56 L50,52 L52,50 L54,52 L54,56 L52,60Z"
-                  fill="#3a5068" fill-rule="evenodd"/>
-            <!-- Gulf water -->
-            <path d="M58,8 L56,18 L54,30 L54,42 L56,52 L58,60
-                     L60,66 L62,72 L66,84 L72,90 L78,94 L84,96 L90,96
-                     L96,98 L100,72 L106,66 L112,68 L120,62 L126,64
-                     L134,58 L140,60 L148,54 L156,56 L168,50 L178,52 L190,48Z"
-                  fill="#6fb5ff" opacity="0.15"/>
-            <!-- Qatar peninsula -->
-            <path d="M58,62 L56,56 L58,54 L60,56 L62,62"
-                  stroke="#6fb5ff" stroke-width="0.6" fill="none" opacity="0.5"/>
-            <!-- Bahrain dot -->
-            <circle cx="52" cy="58" r="1.8" fill="#6fb5ff" opacity="0.4"/>
-            <!-- Labels -->
-            <text x="140" y="44" font-family="Georgia, serif" font-size="7" fill="#b8d8ff" font-style="italic" opacity="0.7" letter-spacing="2">IRAN</text>
-            <text x="16" y="160" font-family="Georgia, serif" font-size="7" fill="#b8d8ff" font-style="italic" opacity="0.5" letter-spacing="1" transform="rotate(-60, 16, 160)">SAUDI ARABIA</text>
-            <text x="160" y="160" font-family="Georgia, serif" font-size="6" fill="#b8d8ff" font-style="italic" opacity="0.5" transform="rotate(75, 160, 160)">OMAN</text>
-            <text x="80" y="230" font-family="Georgia, serif" font-size="6" fill="#b8d8ff" font-style="italic" opacity="0.4" letter-spacing="2">YEMEN</text>
-            <text x="44" y="12" font-family="Georgia, serif" font-size="5" fill="#b8d8ff" font-style="italic" opacity="0.4">Iraq</text>
-            <text x="68" y="48" font-family="Georgia, serif" font-size="5" fill="#6fb5ff" font-style="italic" opacity="0.5">The Gulf</text>
-          </svg>
+          <img class="card-map" src="MiddleEastMap.png" alt="Middle East region"/>
         </article>
         <article class="card product-card">
           <p class="eyebrow">Beta Testing</p>
@@ -434,6 +400,7 @@
           <div class="product-footer">
             <span class="product-badge">Coming Soon</span>
           </div>
+          <img class="card-map" src="TaiwanMap.png" alt="Taiwan region"/>
         </article>
       </section>
     </main>

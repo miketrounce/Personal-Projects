@@ -4,15 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tricksy</title>
+    <link rel="stylesheet" href="../Professional/styles.css" />
     <style>
       :root {
         color-scheme: dark;
         --panel: #34312d;
+        --panel-strong: #3a3632;
         --border: #45403a;
-        --muted: #b8b0a4;
-        --text: #f4f2ec;
         --accent: #81b64c;
         --accent-dark: #6aa23d;
+        --muted: #b8b0a4;
+        --text: #f4f2ec;
         --lula: #d6aa58;
         --lula-dark: #b88733;
         --snake: #6fb5ff;
@@ -21,59 +23,28 @@
         --kaboom-dark: #ba5647;
       }
 
-      * {
-        box-sizing: border-box;
-      }
-
       html,
       body {
         min-height: 100%;
       }
 
       body {
-        margin: 0;
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         background:
           radial-gradient(circle at top left, rgba(129, 182, 76, 0.1), transparent 24%),
           linear-gradient(180deg, #322f2c 0%, #2b2926 100%);
-        color: var(--text);
-      }
-
-      h1,
-      h2,
-      h3,
-      p {
-        margin-top: 0;
-      }
-
-      p {
-        color: var(--muted);
-        line-height: 1.6;
-      }
-
-      a {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 999px;
-        padding: 11px 16px;
-        text-decoration: none;
-        font-weight: 700;
       }
 
       .page {
         width: min(100%, 1480px);
         min-height: 100vh;
-        margin: 0 auto;
-        padding: 14px 24px;
+        padding: 22px 24px;
         display: grid;
         grid-template-rows: auto 1fr;
-        gap: 10px;
+        gap: 16px;
       }
 
       .hero,
       .section-card,
-      .mini-card,
       .route-card {
         border: 1px solid var(--border);
         background: var(--panel);
@@ -82,7 +53,7 @@
       }
 
       .hero {
-        padding: 16px 24px;
+        padding: 22px 28px;
       }
 
       .hero-grid {
@@ -96,71 +67,42 @@
         max-width: 900px;
       }
 
-      .hero-copy h1 {
-        margin-bottom: 6px;
-        font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-        line-height: 0.95;
-      }
-
-      .hero-copy .eyebrow {
-        margin-bottom: 6px;
-      }
-
-      .hero-copy .intro {
-        max-width: 54rem;
-        margin-bottom: 0;
-        font-size: 0.92rem;
-      }
-
       .hero-meta {
         display: grid;
         gap: 12px;
       }
 
       .mini-card {
-        padding: 16px 18px;
+        padding: 14px 16px;
+        border: 1px solid var(--border);
+        border-radius: 18px;
         background: linear-gradient(180deg, #3b3833 0%, #2f2c28 100%);
       }
 
       .mini-card strong {
         display: block;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
         color: var(--text);
         font-size: 1rem;
       }
 
       .mini-card p {
-        margin-bottom: 8px;
-      }
-
-      .mini-card p:last-of-type {
-        margin-bottom: 0;
-      }
-
-      .mini-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 14px;
-      }
-
-      .mini-actions a {
-        padding: 10px 14px;
+        margin: 0;
         font-size: 0.95rem;
       }
 
       .section-card {
-        padding: 14px 16px;
+        padding: 18px 20px;
       }
 
       .routes-grid {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 10px;
+        gap: 14px;
       }
 
       .route-card {
-        padding: 14px 16px;
+        padding: 18px 20px;
         background: linear-gradient(180deg, #3b3833 0%, #2f2c28 100%);
         display: grid;
         gap: 12px;
@@ -168,86 +110,120 @@
         grid-template-rows: auto auto auto 1fr auto;
       }
 
-      .route-kicker,
-      .eyebrow {
-        color: #c9c1b4;
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
-        font-size: 0.76rem;
+      h1,
+      h2,
+      h3,
+      p,
+      ul {
+        margin-top: 0;
       }
 
-      .route-kicker {
-        margin-bottom: 0;
-      }
-
-      h2 {
-        margin: 0 0 6px;
-        font-size: 1.1rem;
+      h1,
+      h2,
+      h3 {
         color: var(--text);
+      }
+
+      h1 {
+        margin-bottom: 12px;
+        font-size: clamp(3rem, 5vw, 4.9rem);
+        line-height: 0.92;
+        font-family: Georgia, "Times New Roman", serif;
+        font-style: italic;
+      }
+
+      h1 span {
+        color: #b8d47f;
       }
 
       h3 {
         margin: 0 0 6px;
-        font-size: 1.05rem;
-        color: var(--text);
+        font-size: 1.25rem;
       }
 
-      .age-note {
-        margin-bottom: 0;
-        color: #d2cbc0;
-        font-size: 0.95rem;
+      p,
+      li {
+        color: var(--muted);
       }
 
-      .route-card > a {
-        margin-top: auto;
-        color: #161914;
+      .eyebrow,
+      .route-kicker {
+        color: #c9c1b4;
       }
 
-      .card-art {
-        width: 100%;
-        aspect-ratio: 2 / 1;
-        overflow: hidden;
-        border-radius: 14px;
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        padding: 11px 16px;
+        text-decoration: none;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 700;
+        background: linear-gradient(180deg, var(--accent) 0%, var(--accent-dark) 100%);
+        color: #1f231a;
       }
 
-      .card-art svg {
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
-
-      .secondary-link {
+      a.secondary {
         background: transparent;
         color: var(--text);
         border: 1px solid var(--border);
       }
 
-      .tricksy-logo,
+      /* Card styles */
+      .lula-card {
+        background: linear-gradient(180deg, rgba(214, 170, 88, 0.14) 0%, rgba(47, 44, 40, 0.96) 100%);
+      }
+
+      .lula-card a {
+        background: linear-gradient(180deg, var(--lula) 0%, var(--lula-dark) 100%);
+        color: #24180a;
+      }
+
+      .snake-card {
+        background: linear-gradient(180deg, rgba(63, 128, 211, 0.18) 0%, rgba(47, 44, 40, 0.96) 100%);
+      }
+
+      .snake-card a {
+        background: linear-gradient(180deg, var(--snake) 0%, var(--snake-dark) 100%);
+        color: #101b2b;
+      }
+
+      .snake-card .route-kicker {
+        color: #b8d8ff;
+      }
+
+      .kaboom-card {
+        background: linear-gradient(180deg, rgba(223, 127, 100, 0.14) 0%, rgba(47, 44, 40, 0.96) 100%);
+      }
+
+      .kaboom-card a {
+        background: linear-gradient(180deg, var(--kaboom) 0%, var(--kaboom-dark) 100%);
+        color: #2a1510;
+      }
+
+      .kaboom-card .route-kicker {
+        color: #f0b8a4;
+      }
+
       .game-logo {
         display: inline-flex;
         align-items: center;
         justify-content: flex-start;
         position: relative;
-        margin-bottom: 8px;
-        padding: 0.28em 0.8em 0.42em 0.88em;
-        min-height: 2.2em;
+        margin-bottom: 14px;
+        padding: 0.3em 0.88em 0.52em;
+        min-height: 2.56em;
         border-radius: 18px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 900;
+        font-size: 1.85rem;
+        line-height: 0.9;
         box-shadow:
           inset 0 1px 0 rgba(255, 255, 255, 0.05),
           0 10px 20px rgba(0, 0, 0, 0.12);
       }
 
-      .tricksy-logo {
-        gap: 0.02em;
-        border: 1px solid rgba(129, 182, 76, 0.24);
-        background: linear-gradient(180deg, rgba(129, 182, 76, 0.14) 0%, rgba(53, 64, 44, 0.22) 100%);
-        font-size: 1.5rem;
-        line-height: 0.84;
-      }
-
-      .tricksy-logo::after,
       .game-logo::after {
         content: "";
         position: absolute;
@@ -258,121 +234,64 @@
         border-radius: 999px;
       }
 
-      .tricksy-logo::after {
-        background: linear-gradient(90deg, rgba(129, 182, 76, 0.92), rgba(226, 187, 98, 0.64));
-        box-shadow: 0 0 12px rgba(129, 182, 76, 0.14);
-      }
-
-      .tricksy-logo .tri {
-        color: #eff3e3;
-        font-family: Georgia, "Times New Roman", serif;
-        font-style: italic;
-        font-weight: 700;
-        letter-spacing: -0.04em;
-      }
-
-      .tricksy-logo .ck {
-        position: relative;
-        top: 0.02em;
-        color: #b8d47f;
-        font-weight: 900;
-        letter-spacing: -0.08em;
-        text-transform: lowercase;
-      }
-
-      .tricksy-logo .sy {
-        color: #efe5cb;
-        font-family: Georgia, "Times New Roman", serif;
-        font-weight: 900;
-        letter-spacing: -0.05em;
-      }
-
-      .lula-card {
-        background: linear-gradient(180deg, rgba(190, 148, 74, 0.14) 0%, rgba(47, 44, 40, 0.96) 100%);
-      }
-
-      .lula-card > a {
-        background: linear-gradient(180deg, var(--lula) 0%, var(--lula-dark) 100%);
-      }
-
-      .snake-card {
-        background: linear-gradient(180deg, rgba(63, 128, 211, 0.18) 0%, rgba(47, 44, 40, 0.96) 100%);
-      }
-
-      .snake-card > a {
-        background: linear-gradient(180deg, var(--snake) 0%, var(--snake-dark) 100%);
-        color: #101b2b;
-      }
-
-      .snake-card .route-kicker {
-        color: #b8d8ff;
-      }
-
-      .kaboom-card {
-        background: linear-gradient(180deg, rgba(223, 127, 100, 0.18) 0%, rgba(47, 44, 40, 0.96) 100%);
-      }
-
-      .kaboom-card > a {
-        background: linear-gradient(180deg, var(--kaboom) 0%, var(--kaboom-dark) 100%);
-        color: #2c130d;
-      }
-
-      .kaboom-card .route-kicker {
-        color: #f0c1b5;
-      }
-
-      .game-logo {
-        min-height: 2.5em;
-        font-size: 1.85rem;
-        line-height: 0.9;
-        font-family: Georgia, "Times New Roman", serif;
-        font-weight: 900;
-      }
-
-      .game-logo.lula-logo {
-        border: 1px solid rgba(190, 148, 74, 0.28);
-        background: linear-gradient(180deg, rgba(190, 148, 74, 0.16) 0%, rgba(79, 59, 31, 0.2) 100%);
+      .lula-logo {
+        border: 1px solid rgba(214, 170, 88, 0.28);
+        background: linear-gradient(180deg, rgba(214, 170, 88, 0.16) 0%, rgba(79, 59, 31, 0.2) 100%);
         color: #f3ead6;
       }
 
-      .game-logo.lula-logo::after {
+      .lula-logo::after {
         background: linear-gradient(90deg, rgba(214, 170, 88, 0.95), rgba(239, 216, 157, 0.58));
-        box-shadow: 0 0 12px rgba(214, 170, 88, 0.14);
       }
 
-      .game-logo.snake-logo {
-        border: 1px solid rgba(111, 181, 255, 0.25);
-        background: linear-gradient(180deg, rgba(63, 128, 211, 0.16) 0%, rgba(22, 36, 58, 0.2) 100%);
+      .snake-logo {
+        border: 1px solid rgba(111, 181, 255, 0.28);
+        background: linear-gradient(180deg, rgba(111, 181, 255, 0.16) 0%, rgba(31, 59, 79, 0.2) 100%);
         color: #d7ebff;
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        font-size: 2rem;
-        font-weight: 900;
-        letter-spacing: 0.06em;
         text-transform: uppercase;
-        text-shadow:
-          0.04em 0.04em 0 rgba(10, 22, 36, 0.28),
-          0 0 18px rgba(111, 181, 255, 0.12);
+        letter-spacing: 0.03em;
       }
 
-      .game-logo.snake-logo::after {
+      .snake-logo::after {
         background: linear-gradient(90deg, rgba(111, 181, 255, 0.9), rgba(63, 128, 211, 0.5));
-        box-shadow: 0 0 16px rgba(111, 181, 255, 0.2);
       }
 
-      .game-logo.kaboom-logo {
-        border: 1px solid rgba(223, 127, 100, 0.25);
-        background: linear-gradient(180deg, rgba(223, 127, 100, 0.14) 0%, rgba(77, 37, 28, 0.22) 100%);
-        color: #ffe4dc;
+      .kaboom-logo {
+        border: 1px solid rgba(223, 127, 100, 0.28);
+        background: linear-gradient(180deg, rgba(223, 127, 100, 0.16) 0%, rgba(79, 41, 31, 0.2) 100%);
+        color: #f6ddd4;
         font-style: italic;
-        letter-spacing: -0.04em;
       }
 
-      .game-logo.kaboom-logo::after {
-        background: linear-gradient(90deg, rgba(223, 127, 100, 0.92), rgba(255, 191, 132, 0.56));
-        box-shadow: 0 0 12px rgba(223, 127, 100, 0.16);
+      .kaboom-logo::after {
+        background: linear-gradient(90deg, rgba(223, 127, 100, 0.95), rgba(186, 86, 71, 0.58));
+      }
+
+      .card-art {
+        width: 100%;
+        aspect-ratio: 16/9;
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        overflow: hidden;
+        margin-bottom: 4px;
+      }
+
+      .card-art svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .route-card > a {
+        margin-top: auto;
       }
 
       @media (max-width: 1280px) {
+        body {
+          overflow: auto;
+        }
+
         .hero-grid,
         .routes-grid {
           grid-template-columns: 1fr;
@@ -386,21 +305,12 @@
 
         .hero,
         .section-card,
-        .mini-card,
         .route-card {
           padding: 18px;
         }
 
-        .hero-copy h1 {
+        h1 {
           font-size: clamp(2.3rem, 10vw, 3.5rem);
-        }
-
-        .mini-actions {
-          flex-direction: column;
-        }
-
-        .mini-actions a {
-          width: 100%;
         }
       }
     </style>
@@ -410,13 +320,18 @@
       <section class="hero">
         <div class="hero-grid">
           <div class="hero-copy">
-            <p class="eyebrow">Games / Experiments</p>
-            <div class="tricksy-logo" aria-label="Tricksy">
-              <span class="tri">Tri</span><span class="ck">ck</span><span class="sy">sy</span>
-            </div>
+            <h1><span>Trick</span>sy</h1>
           </div>
-
+          <div class="hero-meta">
+            <article class="mini-card">
+              <strong>About</strong>
+              <p>Playful releases and side projects.</p>
+              <p>Lula, Snake, and Kaboom.</p>
+              <p>Free to play.</p>
+            </article>
+          </div>
         </div>
+        <div style="height:12px;margin-top:12px;"></div>
       </section>
 
       <section class="section-card" aria-label="Tricksy games">
@@ -424,128 +339,80 @@
           <article class="route-card lula-card">
             <p class="route-kicker">Flagship</p>
             <div class="game-logo lula-logo">Lula</div>
-            <div class="card-art" aria-hidden="true">
-              <svg viewBox="0 0 480 270" role="img">
+            <div class="card-art">
+              <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <linearGradient id="lulaBg" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stop-color="#7a5d2a" />
-                    <stop offset="100%" stop-color="#2f2417" />
-                  </linearGradient>
-                  <linearGradient id="lulaBoard" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stop-color="#f7ecd6" />
-                    <stop offset="100%" stop-color="#dcc39a" />
+                    <stop offset="0%" stop-color="#7a5d2a"/>
+                    <stop offset="100%" stop-color="#2f2417"/>
                   </linearGradient>
                 </defs>
-                <rect width="480" height="270" fill="url(#lulaBg)" />
-                <rect x="52" y="42" width="376" height="186" rx="26" fill="url(#lulaBoard)" />
-                <rect x="72" y="62" width="336" height="146" rx="18" fill="#f2e4c6" stroke="#9d7a3f" stroke-width="5" />
-                <rect x="86" y="76" width="55" height="35" rx="8" fill="#d46a5e" />
-                <rect x="339" y="76" width="55" height="35" rx="8" fill="#6fb5ff" />
-                <rect x="86" y="159" width="55" height="35" rx="8" fill="#81b64c" />
-                <rect x="339" y="159" width="55" height="35" rx="8" fill="#dfb760" />
-                <path d="M167 135c27-31 78-31 105 0" fill="none" stroke="#b88733" stroke-width="10" stroke-linecap="round" />
-                <circle cx="240" cy="138" r="38" fill="#d6aa58" />
-                <rect x="225" y="111" width="30" height="52" rx="8" fill="#3b2d18" />
-                <circle cx="234" cy="126" r="4" fill="#f6ead8" />
-                <circle cx="246" cy="126" r="4" fill="#f6ead8" />
-                <path d="M232 142c5 6 11 9 16 9 6 0 11-3 16-9" fill="none" stroke="#f6ead8" stroke-width="4" stroke-linecap="round" />
-                <rect x="182" y="176" width="116" height="22" rx="11" fill="#f9f2e3" opacity="0.9" />
-                <text x="240" y="191" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="16" font-weight="800" fill="#7a5d2a">LULA AVENUE</text>
+                <rect width="320" height="180" fill="url(#lulaBg)"/>
+                <rect x="52" y="42" width="216" height="96" rx="16" fill="#f2e4c6" stroke="#9d7a3f" stroke-width="3"/>
+                <rect x="62" y="52" width="40" height="26" rx="6" fill="#d46a5e"/>
+                <rect x="218" y="52" width="40" height="26" rx="6" fill="#6fb5ff"/>
+                <rect x="62" y="106" width="40" height="26" rx="6" fill="#81b64c"/>
+                <rect x="218" y="106" width="40" height="26" rx="6" fill="#dfb760"/>
+                <circle cx="160" cy="90" r="24" fill="#d6aa58"/>
+                <rect x="148" y="72" width="24" height="36" rx="6" fill="#3b2d18"/>
+                <text x="160" y="150" text-anchor="middle" font-family="Helvetica" font-size="11" font-weight="800" fill="#f9f2e3" opacity="0.8">LULA AVENUE</text>
               </svg>
             </div>
             <h3>Macro strategy</h3>
-            <p class="age-note">Best for teens and up who enjoy policy, markets, and longer decision chains.</p>
-            <p>
-              Play as President or Trader, tackle the daily challenge, and see
-              how your run stacks up on the leaderboard.
-            </p>
+            <p>Play as President or Trader, tackle the daily challenge, and see how your run stacks up on the leaderboard.</p>
             <a href="./Lula/">Open Lula</a>
           </article>
 
           <article class="route-card snake-card">
             <p class="route-kicker">Arcade</p>
             <div class="game-logo snake-logo">Snake</div>
-            <div class="card-art" aria-hidden="true">
-              <svg viewBox="0 0 480 270" role="img">
-                <defs>
-                  <linearGradient id="snakeBg" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stop-color="#3d83d6" />
-                    <stop offset="100%" stop-color="#1f3b65" />
-                  </linearGradient>
-                </defs>
-                <rect width="480" height="270" fill="url(#snakeBg)" />
-                <circle cx="110" cy="72" r="26" fill="#d9f0ff" opacity="0.18" />
-                <circle cx="396" cy="205" r="34" fill="#d9f0ff" opacity="0.12" />
-                <path d="M104 176c0-33 28-56 62-56 59 0 61 70 116 70 32 0 48-18 48-42 0-20-14-34-35-34-18 0-30 11-30 27 0 13 9 22 21 22 10 0 18-7 18-17" fill="none" stroke="#81b64c" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" />
-                <circle cx="350" cy="104" r="42" fill="#9ad36a" />
-                <circle cx="363" cy="93" r="14" fill="#f0fae2" />
-                <circle cx="342" cy="92" r="14" fill="#f0fae2" />
-                <circle cx="364" cy="95" r="6" fill="#1f231a" />
-                <circle cx="343" cy="95" r="6" fill="#1f231a" />
-                <path d="M336 118c8 10 18 15 29 15 11 0 22-5 31-15" fill="none" stroke="#1f231a" stroke-width="5" stroke-linecap="round" />
-                <path d="M382 122c7 3 12 9 14 17" fill="none" stroke="#d46a5e" stroke-width="4" stroke-linecap="round" />
-                <circle cx="116" cy="176" r="10" fill="#d46a5e" />
-                <rect x="95" y="48" width="112" height="26" rx="13" fill="#d7ebff" opacity="0.92" />
-                <text x="151" y="66" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="16" font-weight="800" fill="#24446f">cheery mode</text>
+            <div class="card-art">
+              <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+                <rect width="320" height="180" fill="#1a3050"/>
+                <path d="M80,120 Q120,120 140,100 Q160,80 180,80 Q200,80 220,90 Q240,100 260,90" stroke="#81b64c" stroke-width="16" fill="none" stroke-linecap="round"/>
+                <circle cx="265" cy="85" r="8" fill="#81b64c"/>
+                <circle cx="262" cy="82" r="3" fill="#1a3050"/>
+                <circle cx="268" cy="82" r="3" fill="#1a3050"/>
+                <circle cx="262" cy="82" r="1.5" fill="white"/>
+                <circle cx="268" cy="82" r="1.5" fill="white"/>
+                <rect x="120" y="40" width="80" height="24" rx="12" fill="#2a4060" stroke="#3a5070" stroke-width="1"/>
+                <text x="160" y="56" text-anchor="middle" font-family="Helvetica" font-size="11" fill="#6fb5ff" font-weight="600">cheery mode</text>
               </svg>
             </div>
             <h3>Fast and familiar</h3>
-            <p class="age-note">Easy to pick up for younger players and simple enough to jump into immediately.</p>
-            <p>
-              A clean browser version of Snake with the same polished Tricksy
-              shell and an instant-play loop.
-            </p>
+            <p>A clean browser version of Snake with the same polished Tricksy shell and an instant-play loop.</p>
             <a href="./Snake/">Open Snake</a>
           </article>
 
           <article class="route-card kaboom-card">
-            <p class="route-kicker">Lab chaos</p>
+            <p class="route-kicker">Lab Chaos</p>
             <div class="game-logo kaboom-logo">Kaboom</div>
-            <div class="card-art" aria-hidden="true">
-              <svg viewBox="0 0 480 270" role="img">
-                <defs>
-                  <linearGradient id="kaboomBg" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stop-color="#6a3124" />
-                    <stop offset="100%" stop-color="#311714" />
-                  </linearGradient>
-                </defs>
-                <rect width="480" height="270" fill="url(#kaboomBg)" />
-                <circle cx="108" cy="62" r="28" fill="#ffcf7d" opacity="0.14" />
-                <circle cx="388" cy="76" r="22" fill="#8fd7ff" opacity="0.18" />
-                <circle cx="240" cy="101" r="36" fill="#f8ead8" />
-                <path d="M206 92c9-30 60-31 70 0-8-12-20-20-35-20-15 0-27 8-35 20z" fill="#f8f4ef" />
-                <circle cx="226" cy="101" r="10" fill="#fff" />
-                <circle cx="254" cy="101" r="10" fill="#fff" />
-                <circle cx="228" cy="103" r="4" fill="#25140f" />
-                <circle cx="256" cy="103" r="4" fill="#25140f" />
-                <path d="M226 121c9 8 19 12 30 12 10 0 20-4 29-12" fill="none" stroke="#25140f" stroke-width="5" stroke-linecap="round" />
-                <rect x="200" y="136" width="80" height="82" rx="20" fill="#f4f0ea" />
-                <rect x="219" y="152" width="42" height="46" rx="10" fill="#81b64c" opacity="0.24" />
-                <path d="M194 174l-54-42" fill="none" stroke="#f8ead8" stroke-width="13" stroke-linecap="round" />
-                <path d="M286 174l54-42" fill="none" stroke="#f8ead8" stroke-width="13" stroke-linecap="round" />
-                <path d="M120 104l19 20v45c0 12 11 18 22 12l13-8c9-5 10-17 3-24l-18-18z" fill="#6fb5ff" stroke="#d7ebff" stroke-width="4" />
-                <path d="M359 104l-19 20v45c0 12-11 18-22 12l-13-8c-9-5-10-17-3-24l18-18z" fill="#df7f64" stroke="#ffd8cf" stroke-width="4" />
-                <circle cx="162" cy="93" r="7" fill="#81b64c" />
-                <circle cx="154" cy="82" r="5" fill="#ffcf7d" />
-                <circle cx="317" cy="87" r="8" fill="#ffcf7d" />
-                <circle cx="327" cy="77" r="5" fill="#81b64c" />
-                <path d="M100 214c24-12 54-18 88-18h104c34 0 64 6 88 18" fill="none" stroke="#8a4331" stroke-width="10" stroke-linecap="round" />
+            <div class="card-art">
+              <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+                <rect width="320" height="180" fill="#2a1f1c"/>
+                <!-- Test tubes -->
+                <rect x="100" y="50" width="16" height="60" rx="8" fill="#df7f64" opacity="0.7"/>
+                <rect x="130" y="40" width="16" height="70" rx="8" fill="#81b64c" opacity="0.7"/>
+                <rect x="160" y="55" width="16" height="55" rx="8" fill="#6fb5ff" opacity="0.7"/>
+                <rect x="190" y="45" width="16" height="65" rx="8" fill="#d6aa58" opacity="0.7"/>
+                <!-- Bubbles -->
+                <circle cx="108" cy="44" r="5" fill="#df7f64" opacity="0.4"/>
+                <circle cx="140" cy="32" r="6" fill="#81b64c" opacity="0.4"/>
+                <circle cx="168" cy="48" r="4" fill="#6fb5ff" opacity="0.4"/>
+                <circle cx="196" cy="38" r="5" fill="#d6aa58" opacity="0.4"/>
+                <circle cx="115" cy="36" r="3" fill="#df7f64" opacity="0.3"/>
+                <circle cx="155" cy="40" r="3" fill="#81b64c" opacity="0.3"/>
+                <!-- Explosion lines -->
+                <path d="M150,130 L140,150 M155,130 L155,152 M160,130 L170,150" stroke="#df7f64" stroke-width="2" opacity="0.4" stroke-linecap="round"/>
               </svg>
             </div>
             <h3>Comic chemistry</h3>
-            <p class="age-note">For curious kids, tweens, and anyone who enjoys silly chain-reaction nonsense.</p>
-            <p>
-              Mix chemicals, push the heat, and try to survive six rounds of
-              ridiculous experimental disaster.
-            </p>
+            <p>Mix chemicals, push the heat, and try to survive six rounds of ridiculous experimental disaster.</p>
             <a href="./Kaboom/">Open Kaboom</a>
           </article>
         </div>
       </section>
 
-      <p style="text-align:center;margin-top:8px;">
-        <a href="../behind-the-scenes/interactivity/" style="display:inline;padding:0;border:none;border-radius:0;background:transparent;color:var(--muted);font-size:0.8rem;font-weight:400;">Behind the Scenes</a>
-      </p>
     </main>
   </body>
 </html>

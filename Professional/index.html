@@ -9,6 +9,7 @@
         color-scheme: dark;
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         --panel: #34312d;
+        --panel-strong: #3a3632;
         --border: #45403a;
         --muted: #b8b0a4;
         --text: #f4f2ec;
@@ -27,35 +28,36 @@
         color: var(--text);
       }
 
-      main {
-        width: min(100%, 960px);
+      .page {
+        width: min(100%, 1480px);
+        min-height: 100vh;
         margin: 0 auto;
-        padding: 40px 22px 60px;
+        padding: 22px 24px;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: 16px;
       }
 
       .hero {
         border: 1px solid var(--border);
         border-radius: 24px;
-        background: linear-gradient(180deg, #3b3833 0%, #2f2c28 100%);
+        background: var(--panel);
         box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
-        padding: 36px;
-        text-align: center;
-      }
-
-      .eyebrow {
-        text-transform: uppercase;
-        letter-spacing: 0.14em;
-        font-size: 0.75rem;
-        color: var(--accent);
-        margin: 0 0 12px;
+        padding: 22px 28px;
       }
 
       h1 {
         font-family: Georgia, "Times New Roman", serif;
-        font-size: clamp(2.4rem, 6vw, 3.6rem);
+        font-size: clamp(2.4rem, 5vw, 3.6rem);
         font-weight: 900;
-        margin: 0 0 8px;
+        margin: 0 0 4px;
         line-height: 1;
+      }
+
+      h3 {
+        margin: 0 0 6px;
+        font-size: 1.15rem;
+        color: var(--text);
       }
 
       p {
@@ -64,14 +66,41 @@
         margin-top: 0;
       }
 
-      .subtitle {
-        font-size: 1.1rem;
-        margin-bottom: 32px;
+      .section-card {
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        background: var(--panel);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+        padding: 18px 20px;
+      }
+
+      .routes-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .route-card {
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 18px 20px;
+        background: linear-gradient(180deg, var(--panel-strong) 0%, #2f2c28 100%);
+        display: grid;
+        gap: 10px;
+        align-content: start;
+      }
+
+      .route-kicker {
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 0.72rem;
+        color: var(--accent);
+        margin: 0;
       }
 
       .video-container {
         width: 100%;
-        border-radius: 16px;
+        border-radius: 14px;
         border: 1px solid var(--border);
         background: #000;
         overflow: hidden;
@@ -80,87 +109,70 @@
       .video-container video {
         width: 100%;
         display: block;
-        border-radius: 16px;
+        border-radius: 14px;
       }
 
-      .nav-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        justify-content: center;
-        margin-top: 28px;
+      .footer-link {
+        text-align: center;
       }
 
-      a {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 999px;
-        padding: 11px 18px;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 0.95rem;
-      }
-
-      a.primary {
-        background: linear-gradient(180deg, var(--accent) 0%, var(--accent-dark) 100%);
-        color: #24180a;
-      }
-
-      a.secondary {
-        color: var(--text);
-        border: 1px solid var(--border);
-        background: transparent;
-      }
-
-      .contact {
-        margin-top: 20px;
-        padding: 20px;
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        background: linear-gradient(180deg, #3b3833 0%, #2f2c28 100%);
-        display: flex;
-        flex-wrap: wrap;
-        gap: 24px;
-        justify-content: center;
-        font-size: 0.9rem;
+      .footer-link a {
         color: var(--muted);
+        font-size: 0.8rem;
+        font-weight: 400;
+        text-decoration: none;
       }
 
-      .contact span {
-        white-space: nowrap;
-      }
-
-      .contact a {
-        display: inline;
-        padding: 0;
-        border: none;
-        border-radius: 0;
-        background: transparent;
-        color: var(--accent);
-        font-weight: 600;
+      @media (max-width: 900px) {
+        .routes-grid {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
   <body>
-    <main>
+    <main class="page">
       <section class="hero">
-        <p class="eyebrow">Professional</p>
         <h1>Michael Trounce</h1>
-        <p class="subtitle">Builder of EM and Global Macro products, looking for my next role.</p>
-
-        <div class="video-container">
-          <video controls preload="metadata">
-            <source src="MikeVideo.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-
       </section>
 
-      <p style="text-align:center;margin-top:12px;">
-        <a href="../behind-the-scenes/video/" style="display:inline;padding:0;border:none;border-radius:0;background:transparent;color:var(--muted);font-size:0.8rem;font-weight:400;">Behind the Scenes</a>
-      </p>
+      <section class="section-card">
+        <div class="routes-grid">
+          <article class="route-card">
+            <p class="route-kicker">Introduction</p>
+            <h3>Who I am</h3>
+            <div class="video-container">
+              <video controls preload="metadata">
+                <source src="MikeVideo.mp4" type="video/mp4">
+              </video>
+            </div>
+            <p>Background, experience, and what I'm looking for next.</p>
+          </article>
+
+          <article class="route-card">
+            <p class="route-kicker">Products</p>
+            <h3>What I build</h3>
+            <div class="video-container">
+              <video controls preload="metadata">
+                <source src="MikeVideo.mp4" type="video/mp4">
+              </video>
+            </div>
+            <p>Dashboards, Knowledge Machines, and data tools for macro investors.</p>
+          </article>
+
+          <article class="route-card">
+            <p class="route-kicker">Process</p>
+            <h3>How I work</h3>
+            <div class="video-container">
+              <video controls preload="metadata">
+                <source src="MikeVideo.mp4" type="video/mp4">
+              </video>
+            </div>
+            <p>From idea to working prototype — fast iteration with AI tools.</p>
+          </article>
+        </div>
+      </section>
+
     </main>
   </body>
 </html>

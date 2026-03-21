@@ -1,87 +1,31 @@
 # miketrounce.github.io
 
-Personal site repository.
+Personal site. Plain HTML, CSS, and a small amount of JavaScript — no framework, no build step.
 
-## Projects
+## Structure
 
-### Home
+```
+miketrounce.github.io/
+  Professional/       # Video-based professional profile
+  technology/         # How this site works
+  learn-more/         # How my dashboards work
+```
 
-- Folder: [`/`](/Users/michaeltrounce/Documents/New project)
-- Live site: [https://miketrounce.github.io/](https://miketrounce.github.io/)
+## Live site
 
-Root landing page that routes visitors into one of three choices.
+[https://miketrounce.github.io/](https://miketrounce.github.io/)
 
-### Professional
+## Related repositories
 
-- Folder: [`Professional/`](/Users/michaeltrounce/Documents/New project/Professional)
-- Live site: [https://miketrounce.github.io/Professional/](https://miketrounce.github.io/Professional/)
-
-Professional-facing page for background, work style, and contact details.
-
-### Knowledge Machines
-
-- Folder: [`Knowledge-Machines/`](/Users/michaeltrounce/Documents/New project/Knowledge-Machines)
-- Live site: [https://miketrounce.github.io/Knowledge-Machines/](https://miketrounce.github.io/Knowledge-Machines/)
-
-Brand page for an idea I have for after my gardening leave at Exante Data finishes
-professionals.
-
-### Tricksy
-
-- Folder: [`Tricksy/`](/Users/michaeltrounce/Documents/New project/Tricksy)
-- Live site: [https://miketrounce.github.io/Tricksy/](https://miketrounce.github.io/Tricksy/)
-
-Umbrella page for small games, playful experiments, and personal builds I'm working on during my gardening leave.
-
-### Kaboom
-
-- Folder: [`Tricksy/Kaboom/`](/Users/michaeltrounce/Documents/New project/Tricksy/Kaboom)
-- Live site: [https://miketrounce.github.io/Tricksy/Kaboom/](https://miketrounce.github.io/Tricksy/Kaboom/)
-
-A silly chemistry-mixing game where surprising reactions and comic lab chaos
-are the goal.
-
-### Snake
-
-- Folder: [`Tricksy/Snake/`](/Users/michaeltrounce/Documents/New project/Tricksy/Snake)
-- Live site: [https://miketrounce.github.io/Tricksy/Snake/](https://miketrounce.github.io/Tricksy/Snake/)
-
-Classic browser-based Snake built with plain HTML, CSS, and JavaScript.
-
-### Lula
-
-- Folder: [`Tricksy/Lula/`](/Users/michaeltrounce/Documents/New project/Tricksy/Lula)
-- Live site: [https://miketrounce.github.io/Tricksy/Lula/](https://miketrounce.github.io/Tricksy/Lula/)
-
-A macro strategy game with Politician and Trader variants, daily challenges, and a live leaderboard.
+| Repo | Live | Description |
+|------|------|-------------|
+| [tricksy](https://github.com/miketrounce/tricksy) | [miketrounce.github.io/tricksy/](https://miketrounce.github.io/tricksy/) | Lula, Snake, and Kaboom |
+| [knowledge-machines](https://github.com/miketrounce/knowledge-machines) | [miketrounce.github.io/knowledge-machines/](https://miketrounce.github.io/knowledge-machines/) | Dashboard product brand page |
 
 ## Run locally
 
-From the repo root:
-
 ```bash
-npm start
+python3 -m http.server 4173
 ```
 
-Then open [http://localhost:4173](http://localhost:4173) and navigate to the
-route you want to preview.
-
-## Run tests
-
-From the repo root:
-
-```bash
-npm test
-```
-
-## Repo structure
-
-```text
-miketrounce.github.io/
-  Professional/
-  Knowledge-Machines/
-  Tricksy/
-    Kaboom/
-    Lula/
-    Snake/
-```
+Then open [http://localhost:4173](http://localhost:4173).
